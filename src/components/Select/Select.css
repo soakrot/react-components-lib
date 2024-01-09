@@ -1,0 +1,58 @@
+.select-container {
+  position: relative;
+  width: 20em;
+  min-height: 1.5em;
+  border: 0.05em solid #777;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+.select-container:focus {
+  border-color: hsl(200, 100%, 50%);
+}
+
+.select__value {
+  flex-grow: 1;
+}
+
+.options-wrapper {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.25em);
+  display: grid;
+  grid-template-rows: 0fr;
+  width: 100%;
+  transition: grid-template-rows 300ms ease-out;
+  transform-origin: top;
+  z-index: 100;
+}
+
+.options-wrapper.is-open {
+  grid-template-rows: 1fr;
+}
+
+.select__options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 15em;
+  overflow: hidden;
+  border: 0.05em solid #777;
+  border-radius: 0.25em;
+}
+
+.select__option {
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.select__option.highlighted {
+  background-color: hsl(200, 100%, 50%);
+}
