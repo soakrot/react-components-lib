@@ -18,8 +18,21 @@ const options = [
   { label: "May", value: "may" },
 ];
 export const FirstStory: Story = {
-  render: () => {
-    const [value, setValue] = useState(options[0].value);
-    return <Select value={value} options={options} onChange={setValue} />;
+  argTypes: {
+    disabled: {
+      options: [true, false],
+      control: { type: "radio" },
+    },
+  },
+  render: (args) => {
+    const [value, setValue] = useState(options[0].label);
+    return (
+      <Select
+        disabled={args.disabled}
+        value={value}
+        options={options}
+        onChange={setValue}
+      />
+    );
   },
 };
