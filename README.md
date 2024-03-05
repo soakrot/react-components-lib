@@ -59,7 +59,7 @@ function App() {
 };
 ```
 
-## User guide {#use-guide}
+## User guide
 
 ### Components {#components}
 
