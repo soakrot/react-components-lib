@@ -19,20 +19,20 @@ component accessible, but it does require some configuration.
 - [User guide](#user-guide)
   - [Components](#components)
     - [Select](#select)
-    - [Scrollspy](#scroll-spy)
+    - [Scrollspy](#scrollspy)
     - [Carousel](#carousel)
   - [Hooks](#hooks)
-    - [useRoveFocus](#use-rove-focus)
+    - [useRoveFocus](#userovefocus)
 
-## Getting started {#getting-started}
+## Getting started
 
-### Compatibility {#compatibility}
+### Compatibility
 
 | React | Newest compatible React-Components-Lib version |
 | ----- | ---------------------------------------------- |
 | >16.3 | latest                                         |
 
-### Installation {#installation}
+### Installation
 
 Add React-Components-Lib by running the following command:
 
@@ -40,7 +40,7 @@ Add React-Components-Lib by running the following command:
 npm install @ravenwaven/react-components-lib
 ```
 
-### Usage {#usage}
+### Usage
 
 Here's an example of basic usage:
 
@@ -59,11 +59,11 @@ function App() {
 };
 ```
 
-## User guide {#use-guide}
+## User guide
 
-### Components {#components}
+### Components
 
-#### Carousel {#carousel}
+#### Carousel
 
 Basic usage:
 
@@ -88,7 +88,7 @@ function App() {
 | className | Class name(s) to be added to the main Carousel's `<div>` element along side "carousel" class | n/a | String: `class1 class2`
 | items | An array of JSX elements for each slide. | n/a | `[<h1>Slide-1</h1>, <h1>Slide-2</h1>]` |
 
-#### Select {#select}
+#### Select
 
 Basic usage:
 
@@ -131,9 +131,9 @@ function App() {
 | value | Displays the currently selected option. | n/a | String: `"option1"`|
 | onChange | Handle Select changes. Passed function accepts a string value as an argument. | n/a | Function: `function handleOnChange(value: string):void`|
 
-### Hooks {#hooks}
+### Hooks
 
-#### useRoveFocus {#use-rove-focus}
+#### useRoveFocus
 
 Basic usage:
 
