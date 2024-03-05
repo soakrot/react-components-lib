@@ -3,7 +3,7 @@ import Select from "./Select";
 import { useState } from "react";
 
 const meta: Meta<typeof Select> = {
-  title: "ReactComponentLib/Select",
+  title: "ReactComponentsLib/Select",
   component: Select,
 };
 export default meta;
