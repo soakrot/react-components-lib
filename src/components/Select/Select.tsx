@@ -1,6 +1,6 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
-import { useOpenMenu, useRoveFocus } from "../../hooks";
-import "./Select.css";
+import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { useRoveFocus } from "../../hooks";
+import classes from "./Select.module.css";
 
 export type SelectOption = {
   label: string;
@@ -23,10 +23,9 @@ function Select({
   onChange,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  // Set the visibility of select-options
-  const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const optionsWrapperRef = useRef<HTMLDivElement>(null);
+  const optionsMenuRef = useRef<HTMLUListElement>(null);
   const optionsRef = useRef<HTMLLIElement[]>([]);
   const {
     currentFocus,
@@ -39,8 +38,6 @@ function Select({
     onEnterPress: handleEnterKeyPress,
     onEscapePress: handleEscapeKeyPress,
   });
-
-  console.log(optionsRef.current);
 
   function handleEnterKeyPress() {
     setIsOpen((prev) => !prev);
@@ -64,65 +61,75 @@ function Select({
     setIsOpen(false);
   }
 
+  function handleOnTransitionEnd() {
+    if (isOpen) return;
+    let transitionOccurance = 0;
+    transitionOccurance++;
+    if (transitionOccurance < 2) {
+      setIsKeyboardActive(false);
+      optionsWrapperRef.current?.setAttribute("data-status", "closed");
+    }
+  }
+
+  function handleOnBlur(e: FocusEvent) {
+    if (e.relatedTarget?.parentElement !== optionsMenuRef.current) {
+      setIsOpen(false);
+    }
+  }
+
+  function pushOptionsRef(el: HTMLLIElement, index: number) {
+    if (el) {
+      optionsRef.current[index] = el;
+    }
+  }
+
   useEffect(() => {
     if (isOpen) {
       setCurrentFocus(-1);
-      setIsVisible(true);
+      optionsWrapperRef.current?.setAttribute("data-status", "open");
     } else {
-      const transitionDuration =
-        getTransitionTime(optionsWrapperRef.current as Element) * 1000;
-      setIsKeyboardActive(false);
-      setTimeout(() => setIsVisible(false), transitionDuration);
+      if (!(optionsMenuRef.current?.dataset.status === "closed")) {
+        optionsWrapperRef.current?.setAttribute("data-status", "closing");
+      }
     }
   }, [isOpen]);
 
   return (
     <div
-      className={`select-container ${className ? className : ""}`}
+      className={`${classes["select-container"]} ${className ? className : ""}`}
       ref={containerRef}
       role="select"
-      tabIndex={0}
+      tabIndex={disabled ? -1 : 0}
       aria-disabled={disabled}
-      // onBlur={() => setIsOpen(false)}
+      onBlur={handleOnBlur}
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <span className="select__value">{value}</span>
+      <span className={classes["select__value"]}>{value}</span>
       <div
-        className={`options-wrapper ${isOpen ? "is-open" : ""}`}
+        className={`${classes["options-wrapper"]} ${isOpen ? "is-open" : ""}`}
         ref={optionsWrapperRef}
         aria-expanded={isOpen}
         aria-hidden={!isOpen}
+        onTransitionEnd={handleOnTransitionEnd}
+        data-status="closed"
       >
-        {isVisible && (
-          <ul className="select__options">
-            {options.map((option, i) => (
-              <li
-                key={option.value}
-                className={`select__option`}
-                onClick={handleOnOptionClick.bind(null, option.value)}
-                onMouseOver={() => setCurrentFocus(i)}
-                ref={(el) => {
-                  if (el) {
-                    optionsRef.current[i] = el;
-                  }
-                }}
-                tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
-              >
-                {option.label}
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className={classes["select__options"]} ref={optionsMenuRef}>
+          {options.map((option, i) => (
+            <li
+              key={option.value}
+              className={classes["select__option"]}
+              onClick={handleOnOptionClick.bind(null, option.value)}
+              onMouseOver={() => setCurrentFocus(i)}
+              ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
+              tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
+            >
+              {option.label}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
-}
-
-function getTransitionTime(element: Element) {
-  return +window
-    .getComputedStyle(element)
-    .getPropertyValue("transition-duration")
-    .replace("s", "");
 }
 
 export default Select;

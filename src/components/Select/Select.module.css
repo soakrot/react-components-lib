@@ -25,6 +25,7 @@
 
 .select__value {
   flex-grow: 1;
+  text-transform: capitalize;
 }
 
 .options-wrapper {
@@ -39,8 +40,13 @@
   z-index: 100;
 }
 
-.options-wrapper[aria-hidden="false"] {
+.options-wrapper[data-status="open"] {
+  visibility: visible;
   grid-template-rows: 1fr;
+}
+
+.options-wrapper[data-status="closed"] {
+  visibility: hidden;
 }
 
 .select__options {
@@ -51,6 +57,7 @@
   overflow: hidden;
   border: 0.05em solid #777;
   border-radius: 0.25em;
+  background-color: white;
 }
 
 .select__option {
