@@ -40,7 +40,7 @@ Add React-Components-Lib by running the following command:
 npm install @ravenwaven/react-components-lib
 ```
 
-### Usage {#usage}
+### Usage
 
 Here's an example of basic usage:
 
