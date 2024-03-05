@@ -1,57 +1,48 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, RefObject } from "react";
 
-type UseRoveFocus<T> = {
-  container: HTMLElement | T;
-  items: HTMLElement[];
-  onEnterPress?: () => void;
-  onEscapePress?: () => void;
-};
-
-function useRoveFocus<T extends HTMLElement>({
-  container,
-  items,
-  onEnterPress,
-  onEscapePress,
-}: UseRoveFocus<T>) {
+function useRoveFocus<T extends HTMLElement>(
+  container: RefObject<HTMLElement | T>,
+  items: RefObject<HTMLElement[] | T[]>,
+  onEnter?: () => void,
+  onEscape?: () => void
+) {
   const [currentFocus, setCurrentFocus] = useState(-1);
   const [isKeyboardActive, setIsKeyboardActive] = useState(false);
-  const [, forceUpdate] = useState(false);
-
-  useEffect(() => forceUpdate(true), []);
 
   useEffect(() => {
-    items[currentFocus] && items[currentFocus].focus();
-    console.log(currentFocus);
+    if (items.current) {
+      items.current[currentFocus] && items.current[currentFocus].focus();
+    }
 
     function handleKeyDown(e: KeyboardEvent) {
       switch (e.code) {
         case "Enter":
           setIsKeyboardActive(true);
-          onEnterPress && onEnterPress();
-          break;
+          onEnter && onEnter();
+          onEscape;
         case "ArrowUp":
           e.preventDefault();
           setCurrentFocus((focus) =>
-            focus === 0 ? items.length - 1 : focus - 1
+            focus === 0 ? items.current!.length - 1 : focus - 1
           );
           break;
         case "ArrowDown":
           e.preventDefault();
           setCurrentFocus((focus) =>
-            focus === items.length - 1 ? 0 : focus + 1
+            focus === items.current!.length - 1 ? 0 : focus + 1
           );
           break;
         case "Escape":
           setIsKeyboardActive(false);
-          onEscapePress && onEscapePress();
+          onEscape && onEscape();
       }
     }
-    container?.addEventListener("keydown", handleKeyDown);
+    container.current?.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      container?.removeEventListener("keydown", handleKeyDown);
+      container.current?.removeEventListener("keydown", handleKeyDown);
     };
-  }, [container, currentFocus, items]);
+  }, [container.current, currentFocus, items.current]);
 
   return {
     currentFocus,

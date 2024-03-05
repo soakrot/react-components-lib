@@ -32,12 +32,12 @@ function Select({
     setCurrentFocus,
     isKeyboardActive,
     setIsKeyboardActive,
-  } = useRoveFocus({
-    container: containerRef.current as HTMLElement,
-    items: optionsRef?.current,
-    onEnterPress: handleEnterKeyPress,
-    onEscapePress: handleEscapeKeyPress,
-  });
+  } = useRoveFocus(
+    containerRef,
+    optionsRef,
+    handleEnterKeyPress,
+    handleEscapeKeyPress
+  );
 
   function handleEnterKeyPress() {
     setIsOpen((prev) => !prev);
@@ -84,11 +84,12 @@ function Select({
   }
 
   useEffect(() => {
+    const optionsWrapperStatus = optionsWrapperRef.current?.dataset.status;
     if (isOpen) {
       setCurrentFocus(-1);
       optionsWrapperRef.current?.setAttribute("data-status", "open");
     } else {
-      if (!(optionsMenuRef.current?.dataset.status === "closed")) {
+      if (optionsWrapperStatus !== "closed") {
         optionsWrapperRef.current?.setAttribute("data-status", "closing");
       }
     }
