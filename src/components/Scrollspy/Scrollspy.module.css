@@ -1,0 +1,8 @@
+.test-box {
+  height: 250px;
+  overflow: scroll;
+}
+
+:global(.active) {
+  color: aqua;
+}
