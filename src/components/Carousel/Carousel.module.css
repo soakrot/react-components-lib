@@ -46,13 +46,11 @@
 
 .carouselItem[data-status="before-start"] {
   translate: -100%;
-  visibility: hidden;
   transition: none;
 }
 
 .carouselItem[data-status="before-end"] {
   translate: 100%;
-  visibility: hidden;
   transition: none;
 }
 

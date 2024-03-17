@@ -2,41 +2,46 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import classes from "./Carousel.module.css";
 
 interface CarouselProps {
-  items: ReactNode[];
+  items: JSX.Element[];
   className?: string;
 }
 
 function Carousel({ className, items }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
+  let transitionCounter = 1;
 
   useEffect(() => {
-    slides.current[0].dataset.status = "active";
+    if (slides.current[0]) {
+      slides.current[0].dataset.status = "active";
+    }
   }, []);
 
+  function handleOnSlideTransitionEnd() {
+    if (transitionCounter === 1) {
+      slides.current.forEach((slide, i) => {
+        if (i === currentIndex) return;
+        slide.dataset.status = "inactive";
+      });
+      transitionCounter++;
+    }
+  }
+
   function goToIndex(index: number) {
-    const prevIndex = currentIndex;
     const nextIndex = index;
-    const currentSlide = slides.current[prevIndex];
+    const currentSlide = slides.current[currentIndex];
     const nextSlide = slides.current[nextIndex];
-    let transitionCounter = 1;
-    if (prevIndex === nextIndex) {
+    if (currentIndex === nextIndex) {
       return;
     }
-    if (nextIndex < prevIndex) {
+    if (nextIndex < currentIndex) {
       currentSlide.dataset.status = "end";
       nextSlide.dataset.status = "before-start";
     }
-    if (nextIndex > prevIndex) {
+    if (nextIndex > currentIndex) {
       currentSlide.dataset.status = "start";
       nextSlide.dataset.status = "before-end";
     }
-    currentSlide.addEventListener("transitionend", () => {
-      if (transitionCounter === 1) {
-        currentSlide.dataset.status = "inactive";
-        transitionCounter++;
-      }
-    });
     setTimeout(() => {
       nextSlide.dataset.status = "active";
     }, 1);
@@ -47,21 +52,12 @@ function Carousel({ className, items }: CarouselProps) {
     slides.current[index] = el;
   }
 
-  function goToPrevious() {
-    // setCurrentIndex((prevIndex) =>
-    //   prevIndex === 0 ? items.length - 1 : prevIndex - 1
-    // );
-  }
-
-  function goToNext() {
-    // setCurrentIndex((prevIndex) =>
-    //   prevIndex === items.length - 1 ? 0 : prevIndex + 1
-    // );
-  }
-
   return (
     <div className={`${classes.carousel} ${className ? className : ""}`}>
-      <ul className={classes.carouselContent}>
+      <ul
+        className={classes.carouselContent}
+        onTransitionEnd={handleOnSlideTransitionEnd}
+      >
         {items.map((item, i) => (
           <li
             key={i}
