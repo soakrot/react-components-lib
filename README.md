@@ -1,14 +1,12 @@
 # React-Components-Lib
 
-<!-- ![NPM Version](https://img.shields.io/npm/v/%40ravenwaven%2Freact-components-lib) -->
+![NPM Version](https://img.shields.io/npm/v/%40ravenwaven%2Freact-components-lib?style=flat&label=npm-package&labelColor=grey&color=brightgreen&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40ravenwaven%2Freact-components-lib)
 
-## Description
-
-React Components Library is a collection of components.
+React Components Library is a collection of user friendly components.
 Along some hooks (e.g useRoveFocus) for making any custom
 component accessible, but it does require some configuration.
 
-**_Note: the library is still work in progress_**
+**Note**: the library is still work in progress
 
 ## Overview
 
