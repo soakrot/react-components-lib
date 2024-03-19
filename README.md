@@ -13,7 +13,7 @@ component accessible, but it does require some configuration.
 ## Overview
 
 - [Getting started](#getting-started)
-- - [Compatibility](#compatibility)
+  - [Compatibility](#compatibility)
   - [Installation](#installition)
   - [Usage](#usage)
 - [User guide](#user-guide)
@@ -44,7 +44,7 @@ npm install @ravenwaven/react-components-lib
 
 Here's an example of basic usage:
 
-```
+```javascript
 import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { Carousel } from '@ravenwaven/react-components-lib;
 
@@ -67,7 +67,7 @@ function App() {
 
 Basic usage:
 
-```
+```javascript
 import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { Carousel } from '@ravenwaven/react-components-lib;
 
@@ -92,7 +92,7 @@ function App() {
 
 Basic usage:
 
-```
+```javascript
 import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { Select } from '@ravenwaven/react-components-lib;
 
@@ -137,7 +137,7 @@ function App() {
 
 Basic usage:
 
-```
+```javascript
 import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { useRoveFocus } from '@ravenwaven/react-components-lib;
 
