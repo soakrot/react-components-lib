@@ -1,7 +1,6 @@
 name: Publish to npm
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +13,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - run: npm run rollup
-      - run: npm rollup
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
