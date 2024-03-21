@@ -19,7 +19,7 @@ function useRoveFocus<T extends HTMLElement>(
         case "Enter":
           setIsKeyboardActive(true);
           onEnter && onEnter();
-          onEscape;
+          break;
         case "ArrowUp":
           e.preventDefault();
           setCurrentFocus((focus) =>
