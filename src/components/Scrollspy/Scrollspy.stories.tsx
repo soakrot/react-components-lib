@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Scrollspy from "./Scrollspy";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import classes from "./Scrollspy.module.css";
 
 // Metadata of the component
