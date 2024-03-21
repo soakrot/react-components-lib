@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classes from "./Carousel.module.css";
 
 interface CarouselProps {
