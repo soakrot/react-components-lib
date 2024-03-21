@@ -39,7 +39,13 @@ function Select({
     handleEscapeKeyPress
   );
 
+  function handleOnSelectClick() {
+    if (disabled) return;
+    setIsOpen((prevState) => !prevState);
+  }
+
   function handleEnterKeyPress() {
+    if (disabled) return;
     setIsOpen((prev) => !prev);
     if (isOpen) {
       onChange(options[currentFocus].value);
@@ -61,7 +67,7 @@ function Select({
     setIsOpen(false);
   }
 
-  function handleOnTransitionEnd() {
+  function handleOnOptionsMenuTransitionEnd() {
     if (isOpen) return;
     let transitionOccurance = 0;
     transitionOccurance++;
@@ -103,7 +109,7 @@ function Select({
       tabIndex={disabled ? -1 : 0}
       aria-disabled={disabled}
       onBlur={handleOnBlur}
-      onClick={() => setIsOpen((prev) => !prev)}
+      onClick={handleOnSelectClick}
     >
       <span className={classes["select__value"]}>{value}</span>
       <div
@@ -111,7 +117,7 @@ function Select({
         ref={optionsWrapperRef}
         aria-expanded={isOpen}
         aria-hidden={!isOpen}
-        onTransitionEnd={handleOnTransitionEnd}
+        onTransitionEnd={handleOnOptionsMenuTransitionEnd}
         data-status="closed"
       >
         <ul className={classes["select__options"]} ref={optionsMenuRef}>
