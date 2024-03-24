@@ -1,12 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  ComponentType,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import classes from "./Carousel.module.css";
+
+export type IndicatorProps = {
+  index: number;
+  onClick: MouseEventHandler;
+  className: string;
+};
 
 interface CarouselProps {
   items: JSX.Element[];
   className?: string;
+  Indicator?: ComponentType<IndicatorProps>;
 }
 
-function Carousel({ className, items }: CarouselProps) {
+function Carousel({ className, items, Indicator }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
   let transitionCounter = 1;
@@ -25,6 +38,10 @@ function Carousel({ className, items }: CarouselProps) {
       });
       transitionCounter++;
     }
+  }
+
+  function handleOnButtonsClick(index: number) {
+    goToIndex(index);
   }
 
   function goToIndex(index: number) {
@@ -70,13 +87,27 @@ function Carousel({ className, items }: CarouselProps) {
         ))}
       </ul>
       <div className={classes.carouselIndicators}>
-        {items.map((_, i) => (
-          <button
-            key={i}
-            className={currentIndex === i ? classes.active : ""}
-            onClick={() => goToIndex(i)}
-          ></button>
-        ))}
+        {Indicator &&
+          items.map((_, i) => (
+            <Indicator
+              key={i}
+              index={i}
+              className={`${classes.carouselIndicator} ${
+                currentIndex === i ? "active" : ""
+              }`}
+              onClick={() => handleOnButtonsClick(i)}
+            />
+          ))}
+        {!Indicator &&
+          items.map((_, i) => (
+            <button
+              key={i}
+              className={`${classes.carouselIndicator} ${
+                currentIndex === i ? "active" : ""
+              }`}
+              onClick={() => handleOnButtonsClick(i)}
+            ></button>
+          ))}
       </div>
     </div>
   );

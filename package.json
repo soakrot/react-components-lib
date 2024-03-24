@@ -1,6 +1,6 @@
 {
   "name": "@ravenwaven/react-components-lib",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Simple React components library",
   "main": "dist/cjs/main.js",
   "module": "dist/esm/main.js",

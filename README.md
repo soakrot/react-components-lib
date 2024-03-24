@@ -80,11 +80,21 @@ function App() {
 };
 ```
 
+Carousel with custom indicators:
+
+```javascript
+<div>
+  <Carousel items={carouselItems} Indicator={CustomIndicator} />
+</div>
+```
+
 <!-- prettier-ignore -->
 | Prop name | Description | Default value | Example |
 |---|---|---|---|
 | className | Class name(s) to be added to the main Carousel's `<div>` element along side "carousel" class | n/a | String: `class1 class2`
 | items | An array of JSX elements for each slide. | n/a | `[<h1>Slide-1</h1>, <h1>Slide-2</h1>]` |
+| Indicator | A reference to a react component to be used as indicator instead the defaults.
+Passed component takes `className, index, onClick` as props | n/a | Component: <Carousel items={items} Indicator={CustomIndicator} />|
 
 #### Select
 

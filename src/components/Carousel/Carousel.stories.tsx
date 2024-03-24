@@ -3,6 +3,7 @@ import Carousel from "./Carousel";
 import img1 from "../../assets/space-1.jpg";
 import img2 from "../../assets/space-2.jpg";
 import img3 from "../../assets/space-3.jpg";
+import CustomIndicator from "./CustomIndicator";
 
 const meta: Meta<typeof Carousel> = {
   title: "ReactComponentsLib/Carousel",
@@ -29,5 +30,12 @@ const TextSlider: Story = {
   },
 };
 
+const SliderWithCustomIndicators: Story = {
+  render() {
+    const items = [<h1>Slider 1</h1>, <h1>Slider 2</h1>, <h1>Slider 3</h1>];
+    return <Carousel items={items} Indicator={CustomIndicator} />;
+  },
+};
+
 export default meta;
-export { ImagesSlider, TextSlider };
+export { ImagesSlider, TextSlider, SliderWithCustomIndicators };
