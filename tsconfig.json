@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "declaration": true,
-    "declarationDir": "dist",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -15,6 +14,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "declarationDir": "dist",
 
     /* Linting */
     "strict": true,

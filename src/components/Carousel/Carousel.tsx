@@ -8,9 +8,9 @@ import {
 import classes from "./Carousel.module.css";
 
 export type IndicatorProps = {
+  className: string;
   index: number;
   onClick: MouseEventHandler;
-  className: string;
 };
 
 interface CarouselProps {
