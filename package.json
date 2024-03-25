@@ -1,10 +1,9 @@
 {
   "name": "@ravenwaven/react-components-lib",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Simple React components library",
-  "main": "dist/cjs/main.js",
-  "module": "dist/esm/main.js",
-  "types": "dist/types/main.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",

@@ -9,27 +9,23 @@ import { libInjectCss } from "vite-plugin-lib-inject-css";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), libInjectCss(), dts({ outDir: "dist/types" })],
+  css: {
+    modules: {
+      generateScopedName: "[local]--[hash:base64:5]",
+    },
+  },
+  plugins: [react(), libInjectCss(), dts({ outDir: "dist" })],
   build: {
     lib: {
       entry: "src/main.ts",
-      formats: ["es", "cjs"],
-      fileName(format, entryName) {
-        if (format === "es") {
-          return `esm/${entryName}.js`;
-        }
-
-        if (format === "cjs") {
-          return `cjs/${entryName}.js`;
-        }
-        return "";
-      },
+      formats: ["es"],
+      fileName: "[name].js",
     },
     assetsDir: "dist/assets",
     rollupOptions: {
       external: ["react", "react/jsx-runtime", "react-dom"],
       input: Object.fromEntries(
-        globSync("src/**/*[^stories].{ts,tsx}").map((file) => [
+        globSync("src/**/*[^stories | d].{ts,tsx}").map((file) => [
           relative("src", file.slice(0, file.length - extname(file).length)),
           fileURLToPath(new URL(file, import.meta.url)),
         ])
