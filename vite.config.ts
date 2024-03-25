@@ -14,7 +14,7 @@ export default defineConfig({
       generateScopedName: "[local]--[hash:base64:5]",
     },
   },
-  plugins: [react(), libInjectCss(), dts({ outDir: "dist" })],
+  plugins: [react(), libInjectCss(), dts({ rollupTypes: true })],
   build: {
     lib: {
       entry: "src/main.ts",
