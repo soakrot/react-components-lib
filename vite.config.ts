@@ -1,21 +1,20 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-// import { dts } from "rollup-plugin-dts";
 import { extname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { globSync } from "glob";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
-// import packageJson from "./package.json" assert { type: "json" };
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  css: {
-    modules: {
-      generateScopedName: "[local]--[hash:base64:5]",
-    },
-  },
   plugins: [react(), libInjectCss(), dts({ rollupTypes: true })],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/test/setup.ts",
+  },
   build: {
     lib: {
       entry: "src/main.ts",
