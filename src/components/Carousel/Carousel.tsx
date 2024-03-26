@@ -17,9 +17,18 @@ interface CarouselProps {
   items: JSX.Element[];
   className?: string;
   Indicator?: ComponentType<IndicatorProps>;
+  autoSlide?: {
+    isEnabled?: boolean;
+    delay?: number;
+  };
 }
 
-function Carousel({ className, items, Indicator }: CarouselProps) {
+function Carousel({
+  autoSlide = { isEnabled: false, delay: 3000 },
+  className,
+  items,
+  Indicator,
+}: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
   let transitionCounter = 1;
@@ -29,6 +38,16 @@ function Carousel({ className, items, Indicator }: CarouselProps) {
       slides.current[0].dataset.status = "active";
     }
   }, []);
+
+  if (autoSlide.isEnabled) {
+    setInterval(() => {
+      if (currentIndex + 1 > items.length - 1) {
+        goToIndex(0);
+      } else {
+        goToIndex(currentIndex + 1);
+      }
+    }, autoSlide.delay);
+  }
 
   function handleOnSlideTransitionEnd() {
     if (transitionCounter === 1) {
