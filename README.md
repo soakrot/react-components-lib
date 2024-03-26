@@ -43,7 +43,6 @@ npm install @ravenwaven/react-components-lib
 Here's an example of basic usage:
 
 ```javascript
-import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { Carousel } from '@ravenwaven/react-components-lib;
 
 function App() {
@@ -66,7 +65,6 @@ function App() {
 Basic usage:
 
 ```javascript
-import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { Carousel } from '@ravenwaven/react-components-lib;
 
 function App() {
@@ -93,15 +91,13 @@ Carousel with custom indicators:
 |---|---|---|---|
 | className | Class name(s) to be added to the main Carousel's `<div>` element along side "carousel" class | n/a | String: `class1 class2`
 | items | An array of JSX elements for each slide. | n/a | `[<h1>Slide-1</h1>, <h1>Slide-2</h1>]` |
-| Indicator | A reference to a react component to be used as indicator instead the defaults.
-Passed component takes `className, index, onClick` as props | n/a | Component: <Carousel items={items} Indicator={CustomIndicator} />|
+| Indicator | A reference to a react component to be used as indicator instead the defaults. <br/> Passed component takes `className, index, onClick` as props | n/a | Component: <Carousel items={items} Indicator={CustomIndicator} />|
 
 #### Select
 
 Basic usage:
 
 ```javascript
-import '@ravenwaven/react-components-lib/dist/esm/main.css;
 import { Select } from '@ravenwaven/react-components-lib;
 
 function App() {
