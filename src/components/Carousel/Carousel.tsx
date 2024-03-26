@@ -89,7 +89,7 @@ function Carousel({
   }
 
   return (
-    <div className={`"carousel" ${className ? className : ""}`}>
+    <div className={`carousel ${className ? className : ""}`}>
       <ul
         className="carousel-content"
         onTransitionEnd={handleOnSlideTransitionEnd}
