@@ -1,5 +1,5 @@
 import React, { MouseEventHandler, ReactNode } from "react";
-import "./Button.module.css";
+import "./Button.css";
 
 interface ButtonProps {
   className?: string;

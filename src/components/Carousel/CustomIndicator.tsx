@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { IndicatorProps } from "./Carousel";
-import classes from "./CustomIndicator.module.css";
+import "./CustomIndicator.css";
 
 interface CustomIndicatorProps extends IndicatorProps {
   children?: ReactNode;
@@ -9,7 +9,7 @@ interface CustomIndicatorProps extends IndicatorProps {
 function CustomIndicator(props: CustomIndicatorProps) {
   return (
     <button
-      className={`${props.className} ${classes.customIndicator}`}
+      className={`${props.className} custom-indicator`}
       onClick={props.onClick}
     >
       {props.index + 1}

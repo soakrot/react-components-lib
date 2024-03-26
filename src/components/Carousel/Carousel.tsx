@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-import classes from "./Carousel.module.css";
+import "./Carousel.css";
 
 export type IndicatorProps = {
   className: string;
@@ -70,15 +70,15 @@ function Carousel({ className, items, Indicator }: CarouselProps) {
   }
 
   return (
-    <div className={`${classes.carousel} ${className ? className : ""}`}>
+    <div className={`"carousel" ${className ? className : ""}`}>
       <ul
-        className={classes.carouselContent}
+        className="carousel-content"
         onTransitionEnd={handleOnSlideTransitionEnd}
       >
         {items.map((item, i) => (
           <li
             key={i}
-            className={classes.carouselItem}
+            className="carousel-item"
             ref={pushToSlidesRef.bind(null, i)}
             data-status="inactive"
           >
@@ -86,13 +86,13 @@ function Carousel({ className, items, Indicator }: CarouselProps) {
           </li>
         ))}
       </ul>
-      <div className={classes.carouselIndicators}>
+      <div className="carousel-indicators">
         {Indicator &&
           items.map((_, i) => (
             <Indicator
               key={i}
               index={i}
-              className={`${classes.carouselIndicator} ${
+              className={`carousel-indicator ${
                 currentIndex === i ? "active" : ""
               }`}
               onClick={() => handleOnButtonsClick(i)}
@@ -102,7 +102,7 @@ function Carousel({ className, items, Indicator }: CarouselProps) {
           items.map((_, i) => (
             <button
               key={i}
-              className={`${classes.carouselIndicator} ${
+              className={`carousel-indicator ${
                 currentIndex === i ? "active" : ""
               }`}
               onClick={() => handleOnButtonsClick(i)}

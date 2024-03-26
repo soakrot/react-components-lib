@@ -1,6 +1,7 @@
 import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { useRoveFocus } from "../../hooks";
-import classes from "./Select.module.css";
+import "./Select.css";
+import { randID } from "../../utils/utils";
 
 export type SelectOption = {
   label: string;
@@ -102,38 +103,52 @@ function Select({
   }, [isOpen]);
 
   return (
-    <div
-      className={`${classes["select-container"]} ${className ? className : ""}`}
-      ref={containerRef}
-      role="select"
-      tabIndex={disabled ? -1 : 0}
-      aria-disabled={disabled}
-      onBlur={handleOnBlur}
-      onClick={handleOnSelectClick}
-    >
-      <span className={classes["select__value"]}>{value}</span>
+    <div>
+      <span id={selectLabel}>{label}</span>
       <div
-        className={`${classes["options-wrapper"]} ${isOpen ? "is-open" : ""}`}
-        ref={optionsWrapperRef}
-        aria-expanded={isOpen}
-        aria-hidden={!isOpen}
-        onTransitionEnd={handleOnOptionsMenuTransitionEnd}
-        data-status="closed"
+        className={`select-container ${className ? className : ""}`}
+        ref={containerRef}
+        tabIndex={disabled ? -1 : 0}
+        // onBlur={handleOnBlur}
+        onClick={handleOnSelectClick}
+        role="combobox"
+        aria-labelledby={selectLabel}
+        aria-disabled={disabled}
+        aria-controls={selectOptionsID}
       >
-        <ul className={classes["select__options"]} ref={optionsMenuRef}>
-          {options.map((option, i) => (
-            <li
-              key={option.value}
-              className={classes["select__option"]}
-              onClick={handleOnOptionClick.bind(null, option.value)}
-              onMouseOver={() => setCurrentFocus(i)}
-              ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
-              tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
-            >
-              {option.label}
-            </li>
-          ))}
-        </ul>
+        <span className="select__value">{value}</span>
+        <div
+          className={`options-wrapper ${isOpen ? "is-open" : ""}`}
+          ref={optionsWrapperRef}
+          onTransitionEnd={handleOnOptionsMenuTransitionEnd}
+          data-status="closed"
+        >
+          <ul
+            id={selectOptionsID}
+            className="select__options"
+            ref={optionsMenuRef}
+            aria-expanded={isOpen}
+            aria-hidden={!isOpen}
+            aria-activedescendant={activeOptionID.current}
+            role="listbox"
+          >
+            {options.map((option, i) => (
+              <li
+                aria-selected={i === currentFocus}
+                role="option"
+                key={option.value}
+                id={`option-${randID()}`}
+                className="select__option"
+                onClick={handleOnOptionClick.bind(null, option.value)}
+                onMouseOver={() => setCurrentFocus(i)}
+                ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
+                tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
+              >
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
