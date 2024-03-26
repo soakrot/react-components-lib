@@ -1,7 +1,5 @@
-name: Publish to github packages
-on:
-  release:
-    types: [published]
+name: Release and Publish to github packages
+on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,6 +14,9 @@ jobs:
         run: npm install
       - name: Build package
         run: npm run build
+      - name: Draft a new release
+        run: npx semantic-release@v23
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
