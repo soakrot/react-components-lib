@@ -1,4 +1,8 @@
-.select-container {
+.select-label {
+  cursor: default;
+}
+
+.select {
   position: relative;
   width: 20em;
   min-height: 1.5em;
@@ -14,12 +18,12 @@
   color: black;
 }
 
-.select-container[aria-disabled="true"] {
+.select[aria-disabled="true"] {
   cursor: not-allowed;
   background-color: #d6d6d6;
 }
 
-.select-container:focus {
+.select:focus {
   border-color: hsl(200, 100%, 50%);
 }
 

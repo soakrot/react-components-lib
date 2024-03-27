@@ -20,6 +20,12 @@ const options = [
 export const FirstStory: Story = {
   argTypes: {
     disabled: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: "radio" },
+    },
+    required: {
+      defaultValue: false,
       options: [true, false],
       control: { type: "radio" },
     },
@@ -30,6 +36,8 @@ export const FirstStory: Story = {
       <Select
         disabled={args.disabled}
         value={value}
+        label={args.label}
+        required={args.required}
         options={options}
         onChange={setValue}
       />

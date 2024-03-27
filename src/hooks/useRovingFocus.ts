@@ -1,6 +1,6 @@
 import { useState, useEffect, RefObject } from "react";
 
-function useRoveFocus<T extends HTMLElement>(
+function useRovingFocus<T extends HTMLElement>(
   container: RefObject<HTMLElement | T>,
   items: RefObject<HTMLElement[] | T[]>,
   onEnter?: () => void,
@@ -14,6 +14,7 @@ function useRoveFocus<T extends HTMLElement>(
       items.current[currentFocus] && items.current[currentFocus].focus();
     }
 
+    const c = container.current;
     function handleKeyDown(e: KeyboardEvent) {
       switch (e.code) {
         case "Enter":
@@ -37,12 +38,12 @@ function useRoveFocus<T extends HTMLElement>(
           onEscape && onEscape();
       }
     }
-    container.current?.addEventListener("keydown", handleKeyDown);
+    c?.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      container.current?.removeEventListener("keydown", handleKeyDown);
+      c?.removeEventListener("keydown", handleKeyDown);
     };
-  }, [container.current, currentFocus, items.current]);
+  }, [currentFocus]);
 
   return {
     currentFocus,
@@ -52,4 +53,4 @@ function useRoveFocus<T extends HTMLElement>(
   };
 }
 
-export default useRoveFocus;
+export default useRovingFocus;

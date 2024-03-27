@@ -1,5 +1,5 @@
 import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
-import { useRoveFocus } from "../../hooks";
+import { useRovingFocus } from "../../hooks";
 import "./Select.css";
 import { randID } from "../../utils/utils";
 
@@ -9,52 +9,51 @@ export type SelectOption = {
 };
 
 interface SelectProps {
-  className?: string;
   options: SelectOption[];
   value: string;
+  className?: string;
   disabled?: boolean;
+  label?: string;
+  required?: boolean;
   onChange: (option: string) => void;
 }
 
-function Select({
-  className,
-  options,
-  value,
-  disabled = false,
-  onChange,
-}: SelectProps) {
+function Select(props: SelectProps) {
+  const {
+    className,
+    disabled = false,
+    label,
+    options,
+    required,
+    value,
+    onChange,
+  } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const selectRef = useRef<HTMLDivElement>(null);
   const optionsWrapperRef = useRef<HTMLDivElement>(null);
   const optionsMenuRef = useRef<HTMLUListElement>(null);
   const optionsRef = useRef<HTMLLIElement[]>([]);
+  /* Accessabilty related variables */
+  const selectLabel = `select-label-${randID()}`;
+  const selectMenuID = `select-options-${randID()}`;
+  const optionsIDs = useRef<string[]>([]);
+  // Add keyboard navigation support to select menu.
   const {
     currentFocus,
     setCurrentFocus,
     isKeyboardActive,
     setIsKeyboardActive,
-  } = useRoveFocus(
-    containerRef,
+  } = useRovingFocus(
+    selectRef,
     optionsRef,
     handleEnterKeyPress,
     handleEscapeKeyPress
   );
 
+  /* On-click handlers */
   function handleOnSelectClick() {
     if (disabled) return;
     setIsOpen((prevState) => !prevState);
-  }
-
-  function handleEnterKeyPress() {
-    if (disabled) return;
-    setIsOpen((prev) => !prev);
-    if (isOpen) {
-      onChange(options[currentFocus].value);
-    }
-  }
-
-  function handleEscapeKeyPress() {
-    setIsOpen(false);
   }
 
   function handleOnOptionClick(
@@ -68,7 +67,20 @@ function Select({
     setIsOpen(false);
   }
 
-  function handleOnOptionsMenuTransitionEnd() {
+  /* useRovingFocus's handlers */
+  function handleEnterKeyPress() {
+    if (disabled) return;
+    setIsOpen((prev) => !prev);
+    if (isOpen) {
+      onChange(options[currentFocus].value);
+    }
+  }
+
+  function handleEscapeKeyPress() {
+    setIsOpen(false);
+  }
+
+  function handleOnMenuTranstionEnd() {
     if (isOpen) return;
     let transitionOccurance = 0;
     transitionOccurance++;
@@ -90,58 +102,87 @@ function Select({
     }
   }
 
+  function getActiveOptionID() {
+    if (!isOpen) return;
+    return optionsIDs.current[currentFocus];
+  }
+
+  function focusSelect() {
+    selectRef.current?.focus();
+  }
+
+  function blurSelect() {
+    selectRef.current?.blur();
+  }
+
+  /* Handles Select menu visibility and navigation */
   useEffect(() => {
     const optionsWrapperStatus = optionsWrapperRef.current?.dataset.status;
     if (isOpen) {
       setCurrentFocus(-1);
+      setIsKeyboardActive(true);
       optionsWrapperRef.current?.setAttribute("data-status", "open");
     } else {
-      if (optionsWrapperStatus !== "closed") {
-        optionsWrapperRef.current?.setAttribute("data-status", "closing");
-      }
+      if (optionsWrapperStatus === "closed") return;
+      optionsWrapperRef.current?.setAttribute("data-status", "closing");
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    optionsIDs.current = optionsRef.current.map(() => `option-${randID()}`);
+  }, [isOpen, currentFocus]);
+
   return (
-    <div>
-      <span id={selectLabel}>{label}</span>
+    <div className={`select-container ${className ? className : ""}`}>
+      <span
+        className="select-label"
+        aria-label={label}
+        id={selectLabel}
+        onClick={() => focusSelect()}
+        onMouseOver={() => focusSelect()}
+        onMouseLeave={() => blurSelect()}
+      >
+        {label}
+      </span>
       <div
-        className={`select-container ${className ? className : ""}`}
-        ref={containerRef}
+        className="select"
+        ref={selectRef}
         tabIndex={disabled ? -1 : 0}
-        // onBlur={handleOnBlur}
+        onBlur={handleOnBlur}
         onClick={handleOnSelectClick}
+        onMouseOver={() => focusSelect()}
         role="combobox"
-        aria-labelledby={selectLabel}
+        aria-controls={selectMenuID}
         aria-disabled={disabled}
-        aria-controls={selectOptionsID}
+        aria-expanded={isOpen}
+        aria-labelledby={selectLabel}
+        aria-required={required}
       >
         <span className="select__value">{value}</span>
         <div
           className={`options-wrapper ${isOpen ? "is-open" : ""}`}
           ref={optionsWrapperRef}
-          onTransitionEnd={handleOnOptionsMenuTransitionEnd}
+          onTransitionEnd={handleOnMenuTranstionEnd}
           data-status="closed"
         >
           <ul
-            id={selectOptionsID}
+            id={selectMenuID}
             className="select__options"
             ref={optionsMenuRef}
-            aria-expanded={isOpen}
-            aria-hidden={!isOpen}
-            aria-activedescendant={activeOptionID.current}
             role="listbox"
+            aria-activedescendant={getActiveOptionID()}
           >
             {options.map((option, i) => (
               <li
-                aria-selected={i === currentFocus}
-                role="option"
+                id={optionsIDs.current[i]}
                 key={option.value}
-                id={`option-${randID()}`}
                 className="select__option"
+                ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
                 onClick={handleOnOptionClick.bind(null, option.value)}
                 onMouseOver={() => setCurrentFocus(i)}
-                ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
+                role="option"
+                aria-selected={i === currentFocus}
                 tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
               >
                 {option.label}
