@@ -1,6 +1,6 @@
 {
   "name": "@ravenwaven/react-components-lib",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Simple React components library",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
