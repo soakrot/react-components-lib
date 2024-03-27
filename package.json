@@ -13,8 +13,7 @@
     "build-storybook": "storybook build"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "tag": "latest"
+    "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
