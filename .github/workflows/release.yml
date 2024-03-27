@@ -4,10 +4,6 @@ jobs:
   build:
     permissions:
       contents: write
-    env:
-      NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      GH_TOKEN: ${{secrets.GH_TOKEN}}
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,3 +19,6 @@ jobs:
       - name: Draft a new release
         run: npx semantic-release@v23
       # - run: npm publish
+    env:
+      NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      GH_TOKEN: ${{secrets.GH_TOKEN}}
