@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/ravenwaven/react-components-lib/compare/v3.1.0...v3.2.0) (2024-03-27)
+
+
+### Features
+
+* add Tabs component ([d5b0ef7](https://github.com/ravenwaven/react-components-lib/commit/d5b0ef749a24c277190471aa2625ac9b0a26435e))
+
 # [3.1.0](https://github.com/ravenwaven/react-components-lib/compare/v3.0.2...v3.1.0) (2024-03-27)
 
 
