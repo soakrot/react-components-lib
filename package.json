@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ravenwaven/react-components-lib.git"
+    "url": "https://github.com/ravenwaven/react-components-lib"
   },
   "files": [
     "dist"
