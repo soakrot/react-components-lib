@@ -1,6 +1,6 @@
 {
   "name": "@ravenwaven/react-components-lib",
-  "version": "3.4.0",
+  "version": "3.2.0",
   "description": "Simple React components library",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ravenwaven/react-components-lib"
+    "url": "git+https://github.com/ravenwaven/react-components-lib"
   },
   "files": [
     "dist"
