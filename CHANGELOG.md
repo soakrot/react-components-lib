@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/ravenwaven/react-components-lib/compare/v3.3.0...v3.4.0) (2024-03-27)
+
+
+### Features
+
+* semantic release ([3c8072e](https://github.com/ravenwaven/react-components-lib/commit/3c8072ee91b5041f105fb6ef67a32e66444c045c))
+
 # [3.3.0](https://github.com/ravenwaven/react-components-lib/compare/v3.2.0...v3.3.0) (2024-03-27)
 
 
