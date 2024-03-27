@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/ravenwaven/react-components-lib/compare/v3.4.0...v3.5.0) (2024-03-27)
+
+
+### Features
+
+* add Nav component ([b5dcbd1](https://github.com/ravenwaven/react-components-lib/commit/b5dcbd1754c7dad34a27f0e5a5650eb249f85fd3))
+
 # [3.2.0](https://github.com/ravenwaven/react-components-lib/compare/v3.1.0...v3.2.0) (2024-03-27)
 
 ### Features
