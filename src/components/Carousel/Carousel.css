@@ -20,11 +20,11 @@
 }
 
 .carousel-item[data-status="active"] {
-  display: block;
+  visibility: visible;
 }
 
 .carousel-item[data-status="inactive"] {
-  display: none;
+  visibility: hidden;
 }
 
 .carousel-item[data-status="start"] {
