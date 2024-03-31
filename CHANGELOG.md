@@ -1,3 +1,10 @@
+## [3.5.5](https://github.com/ravenwaven/react-components-lib/compare/v3.5.4...v3.5.5) (2024-03-31)
+
+
+### Bug Fixes
+
+* carousel indicators changing position after clicking on any indicator ([fbdd449](https://github.com/ravenwaven/react-components-lib/commit/fbdd449f86f0e11843b323c62b5793a03a22ead5))
+
 ## [3.5.4](https://github.com/ravenwaven/react-components-lib/compare/v3.5.3...v3.5.4) (2024-03-31)
 
 
