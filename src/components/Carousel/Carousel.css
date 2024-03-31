@@ -1,32 +1,28 @@
 .carousel {
   position: relative;
-  height: 400px;
-  background-color: aquamarine;
+  background-color: grey;
   overflow: hidden;
 }
 
 .carousel-content {
   position: relative;
-  display: flex;
-  align-items: center;
-  height: 100%;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .carousel-item {
-  position: absolute;
   width: 100%;
+  margin-right: -100%;
   transition: translate 200ms ease;
 }
 
 .carousel-item[data-status="active"] {
-  visibility: visible;
+  display: block;
 }
 
 .carousel-item[data-status="inactive"] {
-  visibility: hidden;
+  display: none;
 }
 
 .carousel-item[data-status="start"] {
@@ -61,7 +57,7 @@
   border-radius: 50%;
   width: 1rem;
   height: 1rem;
-  background-color: grey;
+  background-color: black;
 }
 
 .carousel-indicator.active {
