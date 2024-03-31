@@ -1,3 +1,10 @@
+## [3.5.4](https://github.com/ravenwaven/react-components-lib/compare/v3.5.3...v3.5.4) (2024-03-31)
+
+
+### Bug Fixes
+
+* carousel item not aligning correctly when transitioning in ([48b8781](https://github.com/ravenwaven/react-components-lib/commit/48b8781fe916f34b559fecdd39ef3090f60cad30))
+
 ## [3.5.3](https://github.com/ravenwaven/react-components-lib/compare/v3.5.2...v3.5.3) (2024-03-31)
 
 
