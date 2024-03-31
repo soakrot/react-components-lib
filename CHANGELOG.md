@@ -1,3 +1,10 @@
+## [3.5.3](https://github.com/ravenwaven/react-components-lib/compare/v3.5.2...v3.5.3) (2024-03-31)
+
+
+### Bug Fixes
+
+* height of Carousel not being relative to children ([ec8616b](https://github.com/ravenwaven/react-components-lib/commit/ec8616b7c1e4751649d03dbfbe9c72de2fe5f4c0))
+
 ## [3.5.2](https://github.com/ravenwaven/react-components-lib/compare/v3.5.1...v3.5.2) (2024-03-31)
 
 # [3.5.0](https://github.com/ravenwaven/react-components-lib/compare/v3.4.0...v3.5.0) (2024-03-27)
