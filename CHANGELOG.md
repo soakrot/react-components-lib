@@ -1,3 +1,5 @@
+## [3.5.2](https://github.com/ravenwaven/react-components-lib/compare/v3.5.1...v3.5.2) (2024-03-31)
+
 # [3.5.0](https://github.com/ravenwaven/react-components-lib/compare/v3.4.0...v3.5.0) (2024-03-27)
 
 
