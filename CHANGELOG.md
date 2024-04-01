@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/ravenwaven/react-components-lib/compare/v3.5.5...v3.6.0) (2024-04-01)
+
+
+### Features
+
+* add 'onIndictClick' prop in Carousel to handle click events and pass the current index ([b903247](https://github.com/ravenwaven/react-components-lib/commit/b9032471dff3f5822ec43eb460b71a15b55a196e))
+
 ## [3.5.5](https://github.com/ravenwaven/react-components-lib/compare/v3.5.4...v3.5.5) (2024-03-31)
 
 
