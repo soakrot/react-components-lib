@@ -62,8 +62,9 @@ function Carousel({
     }
   }
 
-  function handleOnButtonsClick(index: number) {
+  function handleOnButtonsClick(index: number, e: MouseEvent) {
     goToIndex(index);
+    onIndictClick && onIndictClick(index, e);
   }
 
   function goToIndex(index: number) {
@@ -117,7 +118,7 @@ function Carousel({
               className={`carousel-indicator ${
                 currentIndex === i ? "active" : ""
               }`}
-              onClick={() => handleOnButtonsClick(i)}
+              onClick={handleOnButtonsClick.bind(null, i)}
             />
           ))}
         {!Indicator &&
@@ -127,7 +128,7 @@ function Carousel({
               className={`carousel-indicator ${
                 currentIndex === i ? "active" : ""
               }`}
-              onClick={() => handleOnButtonsClick(i)}
+              onClick={handleOnButtonsClick.bind(null, i)}
             ></button>
           ))}
       </div>
