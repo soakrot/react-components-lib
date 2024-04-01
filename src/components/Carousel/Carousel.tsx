@@ -1,5 +1,6 @@
 import {
   ComponentType,
+  MouseEvent,
   MouseEventHandler,
   useEffect,
   useRef,
@@ -14,20 +15,22 @@ export type IndicatorProps = {
 };
 
 interface CarouselProps {
-  items: JSX.Element[];
-  className?: string;
-  Indicator?: ComponentType<IndicatorProps>;
-  autoSlide?: {
+  autoPlay?: {
     isEnabled?: boolean;
     delay?: number;
   };
+  className?: string;
+  items: JSX.Element[];
+  Indicator?: ComponentType<IndicatorProps>;
+  onIndictClick?: (index?: number, e?: MouseEvent) => void;
 }
 
 function Carousel({
-  autoSlide = { isEnabled: false, delay: 3000 },
+  autoPlay = { isEnabled: false, delay: 3000 },
   className,
   items,
   Indicator,
+  onIndictClick,
 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
@@ -39,14 +42,14 @@ function Carousel({
     }
   }, []);
 
-  if (autoSlide.isEnabled) {
+  if (autoPlay.isEnabled) {
     setInterval(() => {
       if (currentIndex + 1 > items.length - 1) {
         goToIndex(0);
       } else {
         goToIndex(currentIndex + 1);
       }
-    }, autoSlide.delay);
+    }, autoPlay.delay);
   }
 
   function handleOnSlideTransitionEnd() {
