@@ -1,6 +1,5 @@
 import {
   ComponentType,
-  MouseEvent,
   MouseEventHandler,
   useEffect,
   useRef,
@@ -22,7 +21,7 @@ interface CarouselProps {
   className?: string;
   items: JSX.Element[];
   Indicator?: ComponentType<IndicatorProps>;
-  onIndictClick?: (index?: number, e?: MouseEvent) => void;
+  onIndictClick?: (index: number) => void;
 }
 
 function Carousel({
@@ -62,9 +61,9 @@ function Carousel({
     }
   }
 
-  function handleOnButtonsClick(index: number, e: MouseEvent) {
+  function handleOnButtonsClick(index: number) {
     goToIndex(index);
-    onIndictClick && onIndictClick(index, e);
+    onIndictClick && onIndictClick(index);
   }
 
   function goToIndex(index: number) {
