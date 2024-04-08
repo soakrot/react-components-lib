@@ -1,7 +1,6 @@
 .carousel {
   position: relative;
   background-color: grey;
-  overflow: hidden;
 }
 
 .carousel-content {
@@ -9,6 +8,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  overflow: hidden;
 }
 
 .carousel-item {
