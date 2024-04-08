@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/ravenwaven/react-components-lib/compare/v3.6.0...v3.6.1) (2024-04-03)
+
+
+### Bug Fixes
+
+* change the params of 'onIndicClick' to just index ([c048b1b](https://github.com/ravenwaven/react-components-lib/commit/c048b1beb947693285474fc4dc6ac3ac18b61c80))
+
 # [3.6.0](https://github.com/ravenwaven/react-components-lib/compare/v3.5.5...v3.6.0) (2024-04-01)
 
 
