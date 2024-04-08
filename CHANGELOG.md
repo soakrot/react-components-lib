@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/ravenwaven/react-components-lib/compare/v3.6.1...v3.6.2) (2024-04-08)
+
+
+### Bug Fixes
+
+* set overflow hidden on carousel-content ([b944673](https://github.com/ravenwaven/react-components-lib/commit/b94467378c00a544cbf8b8b0e763e01cc0f67ec0))
+
 ## [3.6.1](https://github.com/ravenwaven/react-components-lib/compare/v3.6.0...v3.6.1) (2024-04-03)
 
 
