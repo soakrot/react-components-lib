@@ -33,11 +33,14 @@ function Carousel({
 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
-  let transitionCounter = 1;
+  const transitionTimeout = 200;
+  let transitionEnd = true;
 
   useEffect(() => {
     if (slides.current[0]) {
-      slides.current[0].dataset.status = "active";
+      // slides.current[0].dataset.status = "active";
+      slides.current[0].classList.remove("carousel-inactive");
+      slides.current[0].classList.add("carousel-active");
     }
   }, []);
 
@@ -52,18 +55,37 @@ function Carousel({
   }
 
   function handleOnSlideTransitionEnd() {
-    if (transitionCounter === 1) {
+    if (transitionEnd) {
       slides.current.forEach((slide, i) => {
         if (i === currentIndex) return;
-        slide.dataset.status = "inactive";
+        slide.classList.remove("carousel-active");
+        slide.classList.add("carousel-inactive");
       });
-      transitionCounter++;
+      transitionEnd = false;
     }
   }
 
   function handleOnButtonsClick(index: number) {
     goToIndex(index);
     onIndictClick && onIndictClick(index);
+  }
+
+  function moveToStart(currentSlide: Element, nextSlide: Element) {
+    currentSlide.classList.add("carousel-end");
+    nextSlide.classList.add("carousel-before-start");
+    setTimeout(() => {
+      currentSlide.classList.remove("carousel-end");
+      nextSlide.classList.remove("carousel-before-start");
+    }, transitionTimeout);
+  }
+
+  function moveToEnd(currentSlide: Element, nextSlide: Element) {
+    currentSlide.classList.add("carousel-start");
+    nextSlide.classList.add("carousel-before-end");
+    setTimeout(() => {
+      currentSlide.classList.remove("carousel-start");
+      nextSlide.classList.remove("carousel-before-end");
+    }, transitionTimeout);
   }
 
   function goToIndex(index: number) {
@@ -74,16 +96,15 @@ function Carousel({
       return;
     }
     if (nextIndex < currentIndex) {
-      currentSlide.dataset.status = "end";
-      nextSlide.dataset.status = "before-start";
+      moveToStart(currentSlide, nextSlide);
     }
     if (nextIndex > currentIndex) {
-      currentSlide.dataset.status = "start";
-      nextSlide.dataset.status = "before-end";
+      moveToEnd(currentSlide, nextSlide);
     }
     setTimeout(() => {
-      nextSlide.dataset.status = "active";
-    }, 1);
+      nextSlide.classList.remove("carousel-inactive");
+      nextSlide.classList.add("carousel-active");
+    }, 2);
     setCurrentIndex(nextIndex);
   }
 
@@ -100,9 +121,9 @@ function Carousel({
         {items.map((item, i) => (
           <li
             key={i}
-            className="carousel-item"
+            className="carousel-item carousel-inactive"
             ref={pushToSlidesRef.bind(null, i)}
-            data-status="inactive"
+            // data-status="inactive"
           >
             {item}
           </li>

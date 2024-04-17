@@ -19,7 +19,32 @@
   transition: translate 200ms ease;
 }
 
-.carousel-item[data-status="active"] {
+.carousel-item.carousel-active {
+  display: block;
+}
+
+.carousel-item.carousel-inactive {
+  display: none;
+}
+
+.carousel-item.carousel-start {
+  translate: -100%;
+}
+
+.carousel-item.carousel-end {
+  translate: 100%;
+}
+
+.carousel-item.carousel-before-start {
+  translate: -100%;
+  transition: none;
+}
+
+.carousel-item.carousel-before-end {
+  translate: 100%;
+  transition: none;
+}
+/* .carousel-item[data-status="active"] {
   visibility: visible;
 }
 
@@ -43,7 +68,7 @@
 .carousel-item[data-status="before-end"] {
   translate: 100%;
   transition: none;
-}
+} */
 
 .carousel-indicators {
   position: absolute;
