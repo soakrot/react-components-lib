@@ -1,3 +1,10 @@
+## [3.6.4](https://github.com/ravenwaven/react-components-lib/compare/v3.6.3...v3.6.4) (2024-04-25)
+
+
+### Bug Fixes
+
+* sliders occasionally overlapping when switching slides ([da433a4](https://github.com/ravenwaven/react-components-lib/commit/da433a48c5c73e202952ee385e3aa21abe58a135))
+
 ## [3.6.3](https://github.com/ravenwaven/react-components-lib/compare/v3.6.2...v3.6.3) (2024-04-17)
 
 ## [3.6.2](https://github.com/ravenwaven/react-components-lib/compare/v3.6.1...v3.6.2) (2024-04-08)
