@@ -34,47 +34,45 @@ function Carousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
   const transitionTimeout = 200;
-  let transitionEnd = true;
 
   useEffect(() => {
     if (slides.current[0]) {
-      // slides.current[0].dataset.status = "active";
-      slides.current[0].classList.remove("carousel-inactive");
-      slides.current[0].classList.add("carousel-active");
+      showSlide(slides.current[0]);
     }
   }, []);
 
   if (autoPlay.isEnabled) {
     setInterval(() => {
       if (currentIndex + 1 > items.length - 1) {
-        goToIndex(0);
+        goToSlide(0);
       } else {
-        goToIndex(currentIndex + 1);
+        goToSlide(currentIndex + 1);
       }
     }, autoPlay.delay);
   }
 
-  function handleOnSlideTransitionEnd() {
-    if (transitionEnd) {
-      slides.current.forEach((slide, i) => {
-        if (i === currentIndex) return;
-        slide.classList.remove("carousel-active");
-        slide.classList.add("carousel-inactive");
-      });
-      transitionEnd = false;
-    }
+  function handleOnIndicatorClick(index: number) {
+    goToSlide(index);
+    onIndictClick && onIndictClick(index);
   }
 
-  function handleOnButtonsClick(index: number) {
-    goToIndex(index);
-    onIndictClick && onIndictClick(index);
+  function showSlide(slide: Element) {
+    slide.classList.remove("carousel-inactive");
+    slide.classList.add("carousel-active");
+  }
+
+  function hideSlide(slide: Element) {
+    slide.classList.remove("carousel-active");
+    slide.classList.add("carousel-inactive");
   }
 
   function moveToStart(currentSlide: Element, nextSlide: Element) {
     currentSlide.classList.add("carousel-end");
+    showSlide(nextSlide);
     nextSlide.classList.add("carousel-before-start");
     setTimeout(() => {
       currentSlide.classList.remove("carousel-end");
+      hideSlide(currentSlide);
       nextSlide.classList.remove("carousel-before-start");
     }, transitionTimeout);
   }
@@ -82,13 +80,15 @@ function Carousel({
   function moveToEnd(currentSlide: Element, nextSlide: Element) {
     currentSlide.classList.add("carousel-start");
     nextSlide.classList.add("carousel-before-end");
+    showSlide(nextSlide);
     setTimeout(() => {
       currentSlide.classList.remove("carousel-start");
+      hideSlide(currentSlide);
       nextSlide.classList.remove("carousel-before-end");
     }, transitionTimeout);
   }
 
-  function goToIndex(index: number) {
+  function goToSlide(index: number) {
     const nextIndex = index;
     const currentSlide = slides.current[currentIndex];
     const nextSlide = slides.current[nextIndex];
@@ -101,10 +101,6 @@ function Carousel({
     if (nextIndex > currentIndex) {
       moveToEnd(currentSlide, nextSlide);
     }
-    setTimeout(() => {
-      nextSlide.classList.remove("carousel-inactive");
-      nextSlide.classList.add("carousel-active");
-    }, 2);
     setCurrentIndex(nextIndex);
   }
 
@@ -114,16 +110,12 @@ function Carousel({
 
   return (
     <div className={`carousel ${className ? className : ""}`}>
-      <ul
-        className="carousel-content"
-        onTransitionEnd={handleOnSlideTransitionEnd}
-      >
+      <ul className="carousel-content">
         {items.map((item, i) => (
           <li
             key={i}
             className="carousel-item carousel-inactive"
             ref={pushToSlidesRef.bind(null, i)}
-            // data-status="inactive"
           >
             {item}
           </li>
@@ -138,7 +130,7 @@ function Carousel({
               className={`carousel-indicator ${
                 currentIndex === i ? "active" : ""
               }`}
-              onClick={handleOnButtonsClick.bind(null, i)}
+              onClick={handleOnIndicatorClick.bind(null, i)}
             />
           ))}
         {!Indicator &&
@@ -148,7 +140,7 @@ function Carousel({
               className={`carousel-indicator ${
                 currentIndex === i ? "active" : ""
               }`}
-              onClick={handleOnButtonsClick.bind(null, i)}
+              onClick={handleOnIndicatorClick.bind(null, i)}
             ></button>
           ))}
       </div>
