@@ -44,38 +44,17 @@
   translate: 100%;
   transition: none;
 }
-/* .carousel-item[data-status="active"] {
-  visibility: visible;
-}
-
-.carousel-item[data-status="inactive"] {
-  visibility: hidden;
-}
-
-.carousel-item[data-status="start"] {
-  translate: -100%;
-}
-
-.carousel-item[data-status="end"] {
-  translate: 100%;
-}
-
-.carousel-item[data-status="before-start"] {
-  translate: -100%;
-  transition: none;
-}
-
-.carousel-item[data-status="before-end"] {
-  translate: 100%;
-  transition: none;
-} */
 
 .carousel-indicators {
   position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
+  justify-content: center;
+  height: min-content;
+  margin-block-end: 1%;
   gap: 1rem;
-  bottom: 4%;
-  left: 50%;
 }
 
 .carousel-indicator {
