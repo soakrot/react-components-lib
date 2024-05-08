@@ -1,3 +1,10 @@
+## [3.6.6](https://github.com/crazysammich/react-components-lib/compare/v3.6.5...v3.6.6) (2024-05-08)
+
+
+### Bug Fixes
+
+* revert back to eslint v8.56.0 to resolve peer depends issues ([482f8c0](https://github.com/crazysammich/react-components-lib/commit/482f8c065c0d09f88a362b807873767b15b39583))
+
 ## [3.6.5](https://github.com/ravenwaven/react-components-lib/compare/v3.6.4...v3.6.5) (2024-04-27)
 
 ## [3.6.4](https://github.com/ravenwaven/react-components-lib/compare/v3.6.3...v3.6.4) (2024-04-25)
