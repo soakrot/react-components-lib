@@ -110,24 +110,24 @@ function Carousel({
 
   return (
     <div className={`carousel ${className ? className : ""}`}>
-      <ul className="carousel-content">
+      <ul className="carousel__content">
         {items.map((item, i) => (
           <li
             key={i}
-            className="carousel-item carousel-inactive"
+            className="carousel__item carousel-inactive"
             ref={pushToSlidesRef.bind(null, i)}
           >
             {item}
           </li>
         ))}
       </ul>
-      <div className="carousel-indicators">
+      <div className="carousel__indicators">
         {Indicator &&
           items.map((_, i) => (
             <Indicator
               key={i}
               index={i}
-              className={`carousel-indicator ${
+              className={`carousel__indicator ${
                 currentIndex === i ? "active" : ""
               }`}
               onClick={handleOnIndicatorClick.bind(null, i)}
@@ -136,8 +136,9 @@ function Carousel({
         {!Indicator &&
           items.map((_, i) => (
             <button
+              aria-label="slide-indicator-button"
               key={i}
-              className={`carousel-indicator ${
+              className={`carousel__indicator ${
                 currentIndex === i ? "active" : ""
               }`}
               onClick={handleOnIndicatorClick.bind(null, i)}
