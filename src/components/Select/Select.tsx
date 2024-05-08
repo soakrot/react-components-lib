@@ -131,7 +131,7 @@ function Select(props: SelectProps) {
   useEffect(() => {
     if (!isOpen) return;
     optionsIDs.current = optionsRef.current.map(() => `option-${randID()}`);
-  }, []);
+  }, [isOpen, currentFocus]);
 
   return (
     <div className={`select-container ${className ? className : ""}`}>
@@ -151,6 +151,7 @@ function Select(props: SelectProps) {
         tabIndex={disabled ? -1 : 0}
         onBlur={handleOnBlur}
         onClick={handleOnSelectClick}
+        onMouseOver={() => focusSelect()}
         role="combobox"
         aria-controls={selectMenuID}
         aria-disabled={disabled}

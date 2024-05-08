@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Carousel from "./Carousel";
-import img1 from "/assets/space-1.jpg";
-import img2 from "/assets/space-2.jpg";
-import img3 from "/assets/space-3.jpg";
+import img1 from "../../assets/space-1.jpg";
+import img2 from "../../assets/space-2.jpg";
+import img3 from "../../assets/space-3.jpg";
 import CustomIndicator from "./CustomIndicator";
 
 const meta: Meta<typeof Carousel> = {
