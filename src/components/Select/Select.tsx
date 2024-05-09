@@ -1,5 +1,5 @@
 import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
-import { useRovingFocus } from "../../hooks";
+import { useClickOutside, useRovingFocus } from "../../hooks";
 import "./Select.css";
 import { randID } from "../../utils/utils";
 
@@ -49,6 +49,7 @@ function Select(props: SelectProps) {
     handleEnterKeyPress,
     handleEscapeKeyPress
   );
+  useClickOutside(selectRef, () => setIsOpen(false));
 
   /* On-click handlers */
   function handleOnSelectClick() {
@@ -87,12 +88,6 @@ function Select(props: SelectProps) {
     if (transitionOccurance < 2) {
       setIsKeyboardActive(false);
       optionsWrapperRef.current?.setAttribute("data-status", "closed");
-    }
-  }
-
-  function handleOnBlur(e: FocusEvent) {
-    if (e.relatedTarget?.parentElement !== optionsMenuRef.current) {
-      setIsOpen(false);
     }
   }
 
@@ -135,7 +130,7 @@ function Select(props: SelectProps) {
 
   return (
     <div className={`select-container ${className ? className : ""}`}>
-      <span
+      <label
         className="select-label"
         aria-label={label}
         id={selectLabel}
@@ -144,12 +139,11 @@ function Select(props: SelectProps) {
         onMouseLeave={() => blurSelect()}
       >
         {label}
-      </span>
+      </label>
       <div
         className="select"
         ref={selectRef}
         tabIndex={disabled ? -1 : 0}
-        onBlur={handleOnBlur}
         onClick={handleOnSelectClick}
         role="combobox"
         aria-controls={selectMenuID}
@@ -166,23 +160,23 @@ function Select(props: SelectProps) {
           data-status="closed"
         >
           <ul
-            id={selectMenuID}
             className="select__options"
+            id={selectMenuID}
             ref={optionsMenuRef}
             role="listbox"
             aria-activedescendant={getActiveOptionID()}
           >
             {options.map((option, i) => (
               <li
-                id={optionsIDs.current[i]}
-                key={option.value}
                 className="select__option"
+                id={optionsIDs.current[i]}
+                role="option"
+                key={option.value}
                 ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
+                aria-selectsed={i === currentFocus}
+                tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
                 onClick={handleOnOptionClick.bind(null, option.value)}
                 onMouseOver={() => setCurrentFocus(i)}
-                role="option"
-                aria-selected={i === currentFocus}
-                tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
               >
                 {option.label}
               </li>

@@ -3,7 +3,7 @@ import Select from "./Select";
 import { useState } from "react";
 
 const meta: Meta<typeof Select> = {
-  title: "ReactComponentsLib/Select",
+  title: "Form Controls/Select",
   component: Select,
 };
 export default meta;
@@ -17,18 +17,9 @@ const options = [
   { label: "Apr", value: "apr" },
   { label: "May", value: "may" },
 ];
-export const FirstStory: Story = {
-  argTypes: {
-    disabled: {
-      defaultValue: false,
-      options: [true, false],
-      control: { type: "radio" },
-    },
-    required: {
-      defaultValue: false,
-      options: [true, false],
-      control: { type: "radio" },
-    },
+export const Default: Story = {
+  args: {
+    label: "Month",
   },
   render: (args) => {
     const [value, setValue] = useState(options[0].label);
@@ -44,3 +35,5 @@ export const FirstStory: Story = {
     );
   },
 };
+
+export const Disabled: Story = {};
