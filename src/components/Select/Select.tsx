@@ -49,9 +49,10 @@ function Select(props: SelectProps) {
     handleEnterKeyPress,
     handleEscapeKeyPress
   );
-  useClickOutside(selectRef, () => setIsOpen(false));
 
   /* On-click handlers */
+  useClickOutside(selectRef, () => setIsOpen(false));
+
   function handleOnSelectClick() {
     if (disabled) return;
     setIsOpen((prevState) => !prevState);
