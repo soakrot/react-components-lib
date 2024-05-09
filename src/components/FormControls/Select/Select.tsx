@@ -1,4 +1,4 @@
-import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { useClickOutside, useRovingFocus } from "../../../hooks";
 import "./Select.css";
 import { randID } from "../../../utils/utils";
