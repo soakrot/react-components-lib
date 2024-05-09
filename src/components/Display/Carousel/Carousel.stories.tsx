@@ -6,7 +6,7 @@ import img3 from "/assets/space-3.jpg";
 import CustomIndicator from "./CustomIndicator";
 
 const meta: Meta<typeof Carousel> = {
-  title: "ReactComponentsLib/Carousel",
+  title: "Display/Carousel",
   component: Carousel,
 };
 

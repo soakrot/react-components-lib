@@ -5,7 +5,7 @@ import classes from "./Scrollspy.module.css";
 
 // Metadata of the component
 const meta: Meta<typeof Scrollspy> = {
-  title: "ReactComponentsLib/Scrollspy",
+  title: "Plugins/Scrollspy",
   component: Scrollspy,
 };
 export default meta;
