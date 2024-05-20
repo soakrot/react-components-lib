@@ -1,3 +1,12 @@
+## [3.6.7](https://github.com/crazysammich/react-components-lib/compare/v3.6.6...v3.6.7) (2024-05-09)
+
+
+### Bug Fixes
+
+* hovering on select's options closes select's menu ([2f878dc](https://github.com/crazysammich/react-components-lib/commit/2f878dc790f983d758669bd2cae4512aef2609fb))
+* select component not being closed properly ([e0689a5](https://github.com/crazysammich/react-components-lib/commit/e0689a58e90b76c338e51fb4c50b4a564c522719))
+* select component not being closed properly ([fd2b1fc](https://github.com/crazysammich/react-components-lib/commit/fd2b1fc76902190b880176fbd5b9cc12ceffe66f))
+
 ## [3.6.6](https://github.com/crazysammich/react-components-lib/compare/v3.6.5...v3.6.6) (2024-05-08)
 
 
