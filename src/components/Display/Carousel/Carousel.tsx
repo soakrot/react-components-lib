@@ -15,8 +15,9 @@ export type IndicatorProps = {
 
 interface CarouselProps {
   autoPlay?: {
-    isEnabled?: boolean;
+    auto: boolean;
     delay?: number;
+    direction?: "forward" | "backward";
   };
   className?: string;
   items: JSX.Element[];
@@ -25,7 +26,7 @@ interface CarouselProps {
 }
 
 function Carousel({
-  autoPlay = { isEnabled: false, delay: 3000 },
+  autoPlay,
   className,
   items,
   Indicator,
@@ -41,19 +42,57 @@ function Carousel({
     }
   }, []);
 
-  if (autoPlay.isEnabled) {
-    setInterval(() => {
-      if (currentIndex + 1 > items.length - 1) {
-        goToSlide(0);
-      } else {
-        goToSlide(currentIndex + 1);
-      }
-    }, autoPlay.delay);
-  }
+  // Auto-play carousel
+  useEffect(() => {
+    let intervalID: NodeJS.Timeout;
+    if (autoPlay?.auto) {
+      intervalID = autoPlayCarousel();
+    }
+    return () => {
+      clearInterval(intervalID);
+    };
+  }, [currentIndex]);
 
-  function handleOnIndicatorClick(index: number) {
-    goToSlide(index);
-    onIndictClick && onIndictClick(index);
+  function autoPlayCarousel() {
+    const intervalID = setInterval(
+      () => {
+        switch (autoPlay?.direction ?? "forward") {
+          case "forward":
+            if (currentIndex + 1 > items.length - 1) {
+              goToSlide(0);
+            } else {
+              goToSlide(currentIndex + 1);
+            }
+            break;
+          case "backward":
+            if (currentIndex - 1 < 0) {
+              goToSlide(items.length - 1);
+            } else {
+              goToSlide(currentIndex - 1);
+            }
+            break;
+        }
+      },
+      (autoPlay?.delay ?? 3) * 1000
+    );
+    return intervalID;
+  }
+  //
+
+  function goToSlide(index: number) {
+    const nextIndex = index;
+    const currentSlide = slides.current[currentIndex];
+    const nextSlide = slides.current[nextIndex];
+    if (currentIndex === nextIndex) {
+      return;
+    }
+    if (nextIndex < currentIndex) {
+      moveToStart(currentSlide, nextSlide);
+    }
+    if (nextIndex > currentIndex) {
+      moveToEnd(currentSlide, nextSlide);
+    }
+    setCurrentIndex(nextIndex);
   }
 
   function showSlide(slide: Element) {
@@ -88,24 +127,13 @@ function Carousel({
     }, transitionTimeout);
   }
 
-  function goToSlide(index: number) {
-    const nextIndex = index;
-    const currentSlide = slides.current[currentIndex];
-    const nextSlide = slides.current[nextIndex];
-    if (currentIndex === nextIndex) {
-      return;
-    }
-    if (nextIndex < currentIndex) {
-      moveToStart(currentSlide, nextSlide);
-    }
-    if (nextIndex > currentIndex) {
-      moveToEnd(currentSlide, nextSlide);
-    }
-    setCurrentIndex(nextIndex);
-  }
-
   function pushToSlidesRef(index: number, el: HTMLLIElement) {
     slides.current[index] = el;
+  }
+
+  function handleOnIndicatorClick(index: number) {
+    goToSlide(index);
+    onIndictClick && onIndictClick(index);
   }
 
   return (
