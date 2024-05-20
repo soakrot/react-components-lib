@@ -1,3 +1,10 @@
+## [3.6.8](https://github.com/crazysammich/react-components-lib/compare/v3.6.7...v3.6.8) (2024-05-20)
+
+
+### Bug Fixes
+
+* carousel auto play not working properly ([a53665c](https://github.com/crazysammich/react-components-lib/commit/a53665ccfee979662bdd0f83005ecd1ec990d9b8))
+
 ## [3.6.7](https://github.com/crazysammich/react-components-lib/compare/v3.6.6...v3.6.7) (2024-05-09)
 
 
