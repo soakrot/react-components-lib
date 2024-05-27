@@ -174,7 +174,7 @@ function Select(props: SelectProps) {
                 role="option"
                 key={option.value}
                 ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
-                aria-selectsed={i === currentFocus}
+                aria-selected={i === currentFocus}
                 tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
                 onClick={handleOnOptionClick.bind(null, option.value)}
                 onMouseOver={() => setCurrentFocus(i)}
