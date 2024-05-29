@@ -2,6 +2,7 @@ import { MouseEvent, useEffect, useRef, useState } from "react";
 import { useClickOutside, useRovingFocus } from "../../../hooks";
 import "./Select.css";
 import { randID } from "../../../utils/utils";
+import { OptionList } from "./OptionList";
 
 export type SelectOption = {
   label: string;
@@ -31,19 +32,13 @@ function Select(props: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
   const optionsWrapperRef = useRef<HTMLDivElement>(null);
-  const optionsMenuRef = useRef<HTMLUListElement>(null);
+  // const optionsMenuRef = useRef<HTMLUListElement>(null);
   const optionsRef = useRef<HTMLLIElement[]>([]);
   /* Accessabilty related variables */
   const selectLabel = `select-label-${randID()}`;
   const selectMenuID = `select-options-${randID()}`;
-  const optionsIDs = useRef<string[]>([]);
   // Add keyboard navigation support to select menu.
-  const {
-    currentFocus,
-    setCurrentFocus,
-    isKeyboardActive,
-    setIsKeyboardActive,
-  } = useRovingFocus(
+  const { currentFocus, setCurrentFocus, setIsKeyboardActive } = useRovingFocus(
     selectRef,
     optionsRef,
     handleEnterKeyPress,
@@ -63,10 +58,12 @@ function Select(props: SelectProps) {
     e: MouseEvent<HTMLLIElement>
   ) {
     e.stopPropagation();
-    if (optionValue !== value) {
-      onChange(optionValue);
-    }
+    onChange(optionValue);
     setIsOpen(false);
+  }
+
+  function handleOnOptionHover(i: number) {
+    setCurrentFocus(i);
   }
 
   /* useRovingFocus's handlers */
@@ -92,17 +89,6 @@ function Select(props: SelectProps) {
     }
   }
 
-  function pushOptionsRef(el: HTMLLIElement, index: number) {
-    if (el) {
-      optionsRef.current[index] = el;
-    }
-  }
-
-  function getActiveOptionID() {
-    if (!isOpen) return;
-    return optionsIDs.current[currentFocus];
-  }
-
   function focusSelect() {
     selectRef.current?.focus();
   }
@@ -123,11 +109,6 @@ function Select(props: SelectProps) {
       optionsWrapperRef.current?.setAttribute("data-status", "closing");
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    optionsIDs.current = optionsRef.current.map(() => `option-${randID()}`);
-  }, []);
 
   return (
     <div className={`select-container ${className ? className : ""}`}>
@@ -160,29 +141,14 @@ function Select(props: SelectProps) {
           onTransitionEnd={handleOnMenuTranstionEnd}
           data-status="closed"
         >
-          <ul
-            className="select__options"
-            id={selectMenuID}
-            ref={optionsMenuRef}
-            role="listbox"
-            aria-activedescendant={getActiveOptionID()}
-          >
-            {options.map((option, i) => (
-              <li
-                className="select__option"
-                id={optionsIDs.current[i]}
-                role="option"
-                key={option.value}
-                ref={(el: HTMLLIElement) => pushOptionsRef(el, i)}
-                aria-selected={i === currentFocus}
-                tabIndex={isKeyboardActive && currentFocus === i ? 0 : -1}
-                onClick={handleOnOptionClick.bind(null, option.value)}
-                onMouseOver={() => setCurrentFocus(i)}
-              >
-                {option.label}
-              </li>
-            ))}
-          </ul>
+          <OptionList
+            currentFocus={currentFocus}
+            isSelectOpen={isOpen}
+            options={options}
+            optionsRef={optionsRef}
+            onOptionClick={handleOnOptionClick}
+            onOptionHover={handleOnOptionHover}
+          />
         </div>
       </div>
     </div>

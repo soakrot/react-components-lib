@@ -1,0 +1,9 @@
+.select__option {
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.select__option:focus {
+  outline: 1px solid black;
+  background-color: hsl(200, 100%, 50%);
+}
