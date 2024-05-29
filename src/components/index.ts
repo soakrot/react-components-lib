@@ -6,4 +6,4 @@ export * from "./media";
 // export * from "./Navigation/";
 
 // Types exports
-export type * from "./display";
+// export type * from "./display";
