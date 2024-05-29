@@ -1,8 +1,8 @@
 // Components exports
-export * from "./display";
-export * from "./formControls";
-export * from "./plugins";
-export * from "./media";
+export * from "./Display";
+export * from "./FormControls";
+export * from "./Plugins";
+export * from "./Media";
 // export * from "./Navigation/";
 
 // Types exports
