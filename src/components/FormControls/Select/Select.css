@@ -24,7 +24,7 @@
 }
 
 .select[aria-disabled="false"]:hover,
-.select:focus {
+.select[aria-disabled="false"]:focus {
   background-color: rgb(175, 248, 224);
 }
 

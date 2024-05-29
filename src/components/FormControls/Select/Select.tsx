@@ -116,9 +116,9 @@ function Select(props: SelectProps) {
         className="select-label"
         aria-label={label}
         id={selectLabel}
-        onClick={() => focusSelect()}
-        onMouseOver={() => focusSelect()}
-        onMouseLeave={() => blurSelect()}
+        onClick={() => !disabled && focusSelect()}
+        onMouseOver={() => !disabled && focusSelect()}
+        onMouseLeave={() => !disabled && blurSelect()}
       >
         {label}
       </label>
