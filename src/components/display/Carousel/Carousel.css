@@ -13,17 +13,16 @@
 .carousel__item {
   position: relative;
   float: left;
+  display: none;
   width: 100%;
   margin-right: -100%;
-  transition: translate 200ms ease;
+  transition: translate 200ms ease-in-out;
 }
 
-.carousel__item.carousel-active {
+.carousel-active,
+.carousel-start,
+.carousel-end {
   display: block;
-}
-
-.carousel__item.carousel-inactive {
-  display: none;
 }
 
 .carousel__item.carousel-start {
@@ -32,16 +31,6 @@
 
 .carousel__item.carousel-end {
   translate: 100%;
-}
-
-.carousel__item.carousel-before-start {
-  translate: -100%;
-  transition: none;
-}
-
-.carousel__item.carousel-before-end {
-  translate: 100%;
-  transition: none;
 }
 
 .carousel__indicators {

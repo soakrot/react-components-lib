@@ -21,24 +21,26 @@ interface CarouselProps {
   };
   className?: string;
   items: JSX.Element[];
+  type?: "horizontal" | "vertical";
   Indicator?: ComponentType<IndicatorProps>;
   onIndictClick?: (index: number) => void;
 }
 
-function Carousel({
-  autoPlay,
-  className,
-  items,
-  Indicator,
-  onIndictClick,
-}: CarouselProps) {
+function Carousel(props: CarouselProps) {
+  const {
+    autoPlay,
+    className,
+    items,
+    type = "horizontal",
+    Indicator,
+    onIndictClick,
+  } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
-  const transitionTimeout = 200;
 
   useEffect(() => {
     if (slides.current[0]) {
-      showSlide(slides.current[0]);
+      toggleSlide(slides.current[0]);
     }
   }, []);
 
@@ -87,44 +89,48 @@ function Carousel({
       return;
     }
     if (nextIndex < currentIndex) {
-      moveToStart(currentSlide, nextSlide);
+      moveToEnd(currentSlide, nextSlide);
     }
     if (nextIndex > currentIndex) {
-      moveToEnd(currentSlide, nextSlide);
+      moveToStart(currentSlide, nextSlide);
     }
     setCurrentIndex(nextIndex);
   }
 
-  function showSlide(slide: Element) {
-    slide.classList.remove("carousel-inactive");
-    slide.classList.add("carousel-active");
-  }
-
-  function hideSlide(slide: Element) {
-    slide.classList.remove("carousel-active");
-    slide.classList.add("carousel-inactive");
-  }
-
-  function moveToStart(currentSlide: Element, nextSlide: Element) {
-    currentSlide.classList.add("carousel-end");
-    showSlide(nextSlide);
-    nextSlide.classList.add("carousel-before-start");
-    setTimeout(() => {
-      currentSlide.classList.remove("carousel-end");
-      hideSlide(currentSlide);
-      nextSlide.classList.remove("carousel-before-start");
-    }, transitionTimeout);
+  function toggleSlide(slide: Element) {
+    slide.classList.toggle("carousel-active");
   }
 
   function moveToEnd(currentSlide: Element, nextSlide: Element) {
-    currentSlide.classList.add("carousel-start");
-    nextSlide.classList.add("carousel-before-end");
-    showSlide(nextSlide);
+    currentSlide.classList.add("carousel-end");
+    nextSlide.classList.add("carousel-start");
+    toggleSlide(nextSlide);
     setTimeout(() => {
-      currentSlide.classList.remove("carousel-start");
-      hideSlide(currentSlide);
-      nextSlide.classList.remove("carousel-before-end");
-    }, transitionTimeout);
+      nextSlide.classList.remove("carousel-start");
+    }, 1);
+    setTimeout(
+      () => {
+        toggleSlide(currentSlide);
+        currentSlide.classList.remove("carousel-end");
+      },
+      getAnimationDuration(currentSlide) * 1000
+    );
+  }
+
+  function moveToStart(currentSlide: Element, nextSlide: Element) {
+    currentSlide.classList.add("carousel-start");
+    nextSlide.classList.add("carousel-end");
+    toggleSlide(nextSlide);
+    setTimeout(() => {
+      nextSlide.classList.remove("carousel-end");
+    }, 1);
+    setTimeout(
+      () => {
+        currentSlide.classList.remove("carousel-start");
+        toggleSlide(currentSlide);
+      },
+      getAnimationDuration(currentSlide) * 1000
+    );
   }
 
   function pushToSlidesRef(index: number, el: HTMLLIElement) {
@@ -137,12 +143,12 @@ function Carousel({
   }
 
   return (
-    <div className={`carousel ${className ? className : ""}`}>
+    <div className={`carousel carousel--${type} ${className ? className : ""}`}>
       <ul className="carousel__content">
         {items.map((item, i) => (
           <li
             key={i}
-            className="carousel__item carousel-inactive"
+            className="carousel__item"
             ref={pushToSlidesRef.bind(null, i)}
           >
             {item}
@@ -174,6 +180,15 @@ function Carousel({
           ))}
       </div>
     </div>
+  );
+}
+
+function getAnimationDuration(el: Element) {
+  return parseFloat(
+    window
+      .getComputedStyle(el)
+      .getPropertyValue("transition-duration")
+      .replace("s", "")
   );
 }
 
