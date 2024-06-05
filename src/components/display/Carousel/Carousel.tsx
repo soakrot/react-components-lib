@@ -40,7 +40,9 @@ function Carousel(props: CarouselProps) {
 
   useEffect(() => {
     if (slides.current[0]) {
-      toggleSlide(slides.current[0]);
+      // toggleSlide(slides.current[0]);
+      slides.current[0].classList.add("carousel-active");
+      console.log(slides.current);
     }
   }, []);
 
