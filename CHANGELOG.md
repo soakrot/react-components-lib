@@ -1,3 +1,21 @@
+# [3.7.0](https://github.com/crazysammich/react-components-lib/compare/v3.6.8...v3.7.0) (2024-05-29)
+
+
+### Bug Fixes
+
+* a typo in Select's internal prop ([270d349](https://github.com/crazysammich/react-components-lib/commit/270d349a05e026d5f21b69518a22c2802a9e06f5))
+* add missing navbar menu button's icons ([c9a7afc](https://github.com/crazysammich/react-components-lib/commit/c9a7afc9004bba7c303e0eeee8b2ce9d16bbb86b))
+* change branch name in semantic release config ([7bb383b](https://github.com/crazysammich/react-components-lib/commit/7bb383b481f87afd493d3428db11eb419088f7c9))
+* export paths in components/index.ts ([87f2da9](https://github.com/crazysammich/react-components-lib/commit/87f2da9e0d322060dcd1983a7f7aa30895a1d8bc))
+* export paths in components/index.ts ([16d421f](https://github.com/crazysammich/react-components-lib/commit/16d421fe5e17a24749522d59e867ab16ca030971))
+* export paths in components/index.ts ([bf9b42b](https://github.com/crazysammich/react-components-lib/commit/bf9b42b8035247bf518217ea7276edb73edbf62f))
+* exports of types in components/index.ts ([3d0e719](https://github.com/crazysammich/react-components-lib/commit/3d0e719d501f4214b48ff3a06e163ebd02341375))
+
+
+### Features
+
+* add Image component ([f9c27b8](https://github.com/crazysammich/react-components-lib/commit/f9c27b8b1a7596cc2673e63806d328555f70a177))
+
 ## [3.6.8](https://github.com/crazysammich/react-components-lib/compare/v3.6.7...v3.6.8) (2024-05-20)
 
 
