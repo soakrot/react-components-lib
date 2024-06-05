@@ -1,3 +1,10 @@
+## [3.7.1](https://github.com/crazysammich/react-components-lib/compare/v3.7.0...v3.7.1) (2024-06-05)
+
+
+### Bug Fixes
+
+* carousel slider not transitioning correctly ([f11fe21](https://github.com/crazysammich/react-components-lib/commit/f11fe219ae5281a81086b5fbd205f67fd0940844))
+
 # [3.7.0](https://github.com/crazysammich/react-components-lib/compare/v3.6.8...v3.7.0) (2024-05-29)
 
 
