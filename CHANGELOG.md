@@ -1,3 +1,5 @@
+## [3.7.3](https://github.com/crazysammich/react-components-lib/compare/v3.7.2...v3.7.3) (2024-06-09)
+
 ## [3.7.2](https://github.com/crazysammich/react-components-lib/compare/v3.7.1...v3.7.2) (2024-06-05)
 
 
