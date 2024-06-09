@@ -1,13 +1,13 @@
 import { ReactNode, RefObject, useEffect, useRef } from "react";
+import "./Scrollspy.css";
 
-type obsOptions = {
+export type obsOptions = {
   rootMargin?: string;
   threshold?: number;
 };
 
 interface ScrollspyProps {
   activeClass: string;
-  target: RefObject<Element>;
   observeTarget: RefObject<Element> | RefObject<Element[]>;
   obsOptions?: obsOptions;
   children?: ReactNode;
@@ -15,7 +15,6 @@ interface ScrollspyProps {
 
 function Scrollspy({
   activeClass,
-  target,
   observeTarget,
   obsOptions = {},
   children,
@@ -25,17 +24,7 @@ function Scrollspy({
   useEffect(() => {
     const obs = new IntersectionObserver(
       function (entries) {
-        entries.forEach((entry) => {
-          const match = findMatchingTargetElement(
-            target.current!,
-            entry.target.id
-          );
-          if (entry.isIntersecting) {
-            match?.classList.add(`${activeClass ? activeClass : "active"}`);
-          } else {
-            match?.classList.remove(`${activeClass ? activeClass : "active"}`);
-          }
-        });
+        entries.forEach(highlightElementInView);
       },
       { root: boxRef.current, ...obsOptions }
     );
@@ -45,29 +34,19 @@ function Scrollspy({
     } else {
       obs.observe(observeTarget.current!);
     }
-  }, [target.current]);
+  }, []);
 
-  return <div ref={boxRef}>{children}</div>;
-}
-
-function findMatchingTargetElement(targetElement: Element, id: string) {
-  if (!targetElement) return;
-  if (!targetElement.hasAttribute("data-scrollspy-target")) {
-    for (let i = 0; i < targetElement.childNodes.length; i++) {
-      if (!targetElement.hasChildNodes()) break;
-      const result: Element = findMatchingTargetElement(
-        targetElement.childNodes[i] as Element,
-        id
-      )!;
-      if (result) {
-        return result;
-      }
+  function highlightElementInView(entry: IntersectionObserverEntry) {
+    const entryID = entry.target.id;
+    const match = document.querySelector(`[data-scrollspy-target=${entryID}]`);
+    if (entry.isIntersecting) {
+      match?.classList.add(`${activeClass ?? "active"}`);
+    } else {
+      match?.classList.remove(`${activeClass ?? "active"}`);
     }
   }
-  const attr = targetElement.getAttribute("data-scrollspy-target");
-  if (id === attr) {
-    return targetElement;
-  }
+
+  return <div ref={boxRef}>{children}</div>;
 }
 
 export default Scrollspy;
