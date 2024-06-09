@@ -1,3 +1,10 @@
+## [3.7.2](https://github.com/crazysammich/react-components-lib/compare/v3.7.1...v3.7.2) (2024-06-05)
+
+
+### Bug Fixes
+
+* carousel active class not applying ([3b75980](https://github.com/crazysammich/react-components-lib/commit/3b759804026ab04ef802ae20a5ebb264dab66172))
+
 ## [3.7.1](https://github.com/crazysammich/react-components-lib/compare/v3.7.0...v3.7.1) (2024-06-05)
 
 
