@@ -9,15 +9,15 @@ type Tab = {
 interface TabsProps {
   className?: string;
   tabs: Tab[];
-  onDestChange: (dest: string) => void;
+  onTabChange: (dest: string) => void;
 }
 
-function Tabs({ tabs, className, onDestChange }: TabsProps) {
+function Tabs({ tabs, className, onTabChange }: TabsProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   function handleOnTabClick(index: number) {
     setActiveTab(index);
-    onDestChange(tabs[index].title);
+    onTabChange(tabs[index].title);
   }
 
   return (
