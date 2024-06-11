@@ -1,3 +1,10 @@
+## [3.8.1](https://github.com/crazysammich/react-components-lib/compare/v3.8.0...v3.8.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* export UI components ([c3338bc](https://github.com/crazysammich/react-components-lib/commit/c3338bc477ac751b28e2fa93bf31977055a70edc))
+
 # [3.8.0](https://github.com/crazysammich/react-components-lib/compare/v3.7.3...v3.8.0) (2024-06-11)
 
 
