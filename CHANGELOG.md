@@ -1,3 +1,12 @@
+# [3.8.0](https://github.com/crazysammich/react-components-lib/compare/v3.7.3...v3.8.0) (2024-06-11)
+
+
+### Features
+
+* add spinner component ([503fdeb](https://github.com/crazysammich/react-components-lib/commit/503fdebd0e3ae00979243d307a3860aa5b8829d5))
+* add useInput hook ([5637d95](https://github.com/crazysammich/react-components-lib/commit/5637d959f9cda79e90de5f64837da7cd220aa42a))
+* add vertical type carousel ([48800e0](https://github.com/crazysammich/react-components-lib/commit/48800e0e00aec1ed18c16720b50bcefa6cfc3e0c))
+
 ## [3.7.3](https://github.com/crazysammich/react-components-lib/compare/v3.7.2...v3.7.3) (2024-06-09)
 
 ## [3.7.2](https://github.com/crazysammich/react-components-lib/compare/v3.7.1...v3.7.2) (2024-06-05)
