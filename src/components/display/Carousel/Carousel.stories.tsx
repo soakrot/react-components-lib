@@ -25,10 +25,23 @@ const ImagesSlider: Story = {
   },
 };
 
+const items = new Array(3).fill(null).map((_, i) => (
+  <div className="slider">
+    <h1>Slider {i + 1}</h1>
+  </div>
+));
+
 const Default: Story = {
   render: () => {
-    const items = [<h1>Slider 1</h1>, <h1>Slider 2</h1>, <h1>Slider 3</h1>];
     return <Carousel className="default-story" items={items} />;
+  },
+};
+
+const Vertical: Story = {
+  render: () => {
+    return (
+      <Carousel className="vertical-story" type="vertical" items={items} />
+    );
   },
 };
 
@@ -40,4 +53,4 @@ const WithCustomIndicators: Story = {
 };
 
 export default meta;
-export { ImagesSlider, Default, WithCustomIndicators };
+export { Default, Vertical, ImagesSlider, WithCustomIndicators };

@@ -1,6 +1,11 @@
-.default-story .carousel__item {
-  padding-block: 25%;
-  background-color: bisque;
+.default-story,
+.vertical-story {
+  .slider {
+    display: flex;
+    justify-content: center;
+    padding-block: 25%;
+    background-color: bisque;
+  }
 }
 
 .images-story .carousel__item {
