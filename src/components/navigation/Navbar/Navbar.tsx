@@ -25,10 +25,10 @@ function useNavbar() {
 }
 
 // Main component
+
 interface NavbarProps {
   children?: ReactNode;
   className?: string;
-  isCollapsible?: boolean;
 }
 function Navbar({ children, className }: NavbarProps) {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
