@@ -1,0 +1,32 @@
+.product-gallery {
+  width: 50%;
+}
+
+.product-gallery__hero {
+  position: relative;
+  cursor: move;
+  width: 100%;
+  min-height: 200px;
+
+  > img.zoom {
+    max-width: initial;
+    position: absolute;
+  }
+}
+
+.product-gallery__thumbs {
+  display: flex;
+  padding-block: 1rem 0;
+  column-gap: 1rem;
+  list-style-type: none;
+  > li.active {
+    opacity: 0.5;
+    border: 1px solid royalblue;
+  }
+}
+
+.product-gallery__hero,
+.product-gallery__thumbs > li {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
