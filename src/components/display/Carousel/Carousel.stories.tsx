@@ -26,7 +26,7 @@ const ImagesSlider: Story = {
 };
 
 const items = new Array(3).fill(null).map((_, i) => (
-  <div className="slider">
+  <div className={`slider ${i === 1 ? "slider--dark" : ""}`}>
     <h1>Slider {i + 1}</h1>
   </div>
 ));
@@ -37,11 +37,33 @@ const Default: Story = {
   },
 };
 
+const FadeIn: Story = {
+  render() {
+    return (
+      <Carousel className="default-story" animationType="fade" items={items} />
+    );
+  },
+};
+
 const Vertical: Story = {
   render: () => {
     return (
-      <Carousel className="vertical-story" type="vertical" items={items} />
+      <Carousel className="vertical-story" direction="vertical" items={items} />
     );
+  },
+};
+
+const Indicator: Story = {
+  render() {
+    return (
+      <Carousel className="default-story" items={items} type="indicator" />
+    );
+  },
+};
+
+const IndicatorAndControls: Story = {
+  render() {
+    return <Carousel className="default-story" items={items} type="both" />;
   },
 };
 
@@ -53,4 +75,12 @@ const WithCustomIndicators: Story = {
 };
 
 export default meta;
-export { Default, Vertical, ImagesSlider, WithCustomIndicators };
+export {
+  Default,
+  FadeIn,
+  Vertical,
+  Indicator,
+  IndicatorAndControls,
+  ImagesSlider,
+  WithCustomIndicators,
+};
