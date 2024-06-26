@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/crazysammich/react-components-lib/compare/v3.8.1...v3.9.0) (2024-06-26)
+
+
+### Features
+
+* add next/previous controls to carousel ([b6b1be2](https://github.com/crazysammich/react-components-lib/commit/b6b1be2066a5c340bcb803cd3471aa98b6f2122d))
+
 ## [3.8.1](https://github.com/crazysammich/react-components-lib/compare/v3.8.0...v3.8.1) (2024-06-11)
 
 
