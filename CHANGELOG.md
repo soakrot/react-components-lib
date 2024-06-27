@@ -1,3 +1,15 @@
+# [3.10.0](https://github.com/crazysammich/react-components-lib/compare/v3.9.0...v3.10.0) (2024-06-27)
+
+
+### Bug Fixes
+
+* remove early access to product-gallery component ([52f14c4](https://github.com/crazysammich/react-components-lib/commit/52f14c44e247584160d5724d74e85c52cf954a45))
+
+
+### Features
+
+* add support for touch swipe to carousel ([2cab20b](https://github.com/crazysammich/react-components-lib/commit/2cab20bd15a2389d72ac2d59b1dc891c56e686a2))
+
 # [3.9.0](https://github.com/crazysammich/react-components-lib/compare/v3.8.1...v3.9.0) (2024-06-26)
 
 
