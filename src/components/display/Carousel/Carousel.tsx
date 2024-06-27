@@ -27,7 +27,9 @@ interface CarouselProps {
   type?: "controls" | "indicator" | "both";
   animationType?: "slide" | "fade";
   Indicator?: ComponentType<IndicatorProps>;
-  onIndictClick?: (index: number) => void;
+  onIndictClick?: (i: number) => void;
+  onControlsClick?: (i: number) => void;
+  onSwipe?: (i: number) => void;
 }
 
 function Carousel(props: CarouselProps) {
@@ -40,6 +42,8 @@ function Carousel(props: CarouselProps) {
     type = "controls",
     Indicator,
     onIndictClick,
+    onControlsClick,
+    onSwipe,
   } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = useRef<HTMLLIElement[]>([]);
@@ -151,12 +155,14 @@ function Carousel(props: CarouselProps) {
 
   function handleOnNextClick() {
     goToSlide(currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1);
+    onControlsClick && onControlsClick(currentIndex);
   }
 
   function handleOnPrevClick() {
     goToSlide(
       currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
     );
+    onControlsClick && onControlsClick(currentIndex);
   }
 
   function handleOnItemTouchEnd(e: TouchEvent<HTMLLIElement>) {
@@ -168,6 +174,7 @@ function Carousel(props: CarouselProps) {
       goToSlide(
         currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1
       );
+      onSwipe && onSwipe(currentIndex);
       return;
     }
     if (touchX < sliderX) {
@@ -175,6 +182,7 @@ function Carousel(props: CarouselProps) {
       goToSlide(
         currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
       );
+      onSwipe && onSwipe(currentIndex);
       return;
     }
   }
