@@ -1,3 +1,10 @@
+## [3.10.1](https://github.com/crazysammich/react-components-lib/compare/v3.10.0...v3.10.1) (2024-06-27)
+
+
+### Bug Fixes
+
+* add handler props for ontouchend and oncontrolsclick in carousel ([9eca259](https://github.com/crazysammich/react-components-lib/commit/9eca259a81064bce60b049814fd756ee8cf2dd75))
+
 # [3.10.0](https://github.com/crazysammich/react-components-lib/compare/v3.9.0...v3.10.0) (2024-06-27)
 
 
