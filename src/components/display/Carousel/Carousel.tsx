@@ -1,6 +1,7 @@
 import {
   ComponentType,
   MouseEventHandler,
+  TouchEvent,
   useEffect,
   useRef,
   useState,
@@ -158,6 +159,26 @@ function Carousel(props: CarouselProps) {
     );
   }
 
+  function handleOnItemTouchEnd(e: TouchEvent<HTMLLIElement>) {
+    e.preventDefault();
+    const sliderX = slides.current[currentIndex].offsetWidth / 2;
+    const touchX = e.changedTouches[0].clientX;
+    if (touchX > sliderX) {
+      // Swipe right
+      goToSlide(
+        currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1
+      );
+      return;
+    }
+    if (touchX < sliderX) {
+      // Swipe left
+      goToSlide(
+        currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
+      );
+      return;
+    }
+  }
+
   const controls = (
     <>
       <button
@@ -218,6 +239,7 @@ function Carousel(props: CarouselProps) {
             key={i}
             className="carousel__item"
             ref={pushToSlidesRef.bind(null, i)}
+            onTouchEnd={handleOnItemTouchEnd}
           >
             {item}
           </li>
