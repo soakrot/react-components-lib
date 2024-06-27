@@ -6,6 +6,10 @@
     padding-block: 25%;
     background-color: bisque;
   }
+  .slider--dark {
+    background-color: grey;
+    color: white;
+  }
 }
 
 .images-story .carousel__item {

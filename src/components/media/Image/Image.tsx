@@ -32,9 +32,9 @@ function Image(props: ImageProps) {
   });
 
   function handleOnImgLoad(e: SyntheticEvent<HTMLImageElement>) {
+    onLoad && onLoad(e);
     const img = e.currentTarget;
     setImgDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-    onLoad && onLoad(e);
   }
 
   return (

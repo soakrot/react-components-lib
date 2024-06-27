@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import "./Carousel.css";
+import icons from "/assets/icons-sprite.svg";
 
 export type IndicatorProps = {
   className: string;
@@ -21,7 +22,9 @@ interface CarouselProps {
   };
   className?: string;
   items: JSX.Element[];
-  type?: "horizontal" | "vertical";
+  direction?: "horizontal" | "vertical";
+  type?: "controls" | "indicator" | "both";
+  animationType?: "slide" | "fade";
   Indicator?: ComponentType<IndicatorProps>;
   onIndictClick?: (index: number) => void;
 }
@@ -29,9 +32,11 @@ interface CarouselProps {
 function Carousel(props: CarouselProps) {
   const {
     autoPlay,
+    animationType = "slide",
     className,
     items,
-    type = "horizontal",
+    direction = "horizontal",
+    type = "controls",
     Indicator,
     onIndictClick,
   } = props;
@@ -143,8 +148,70 @@ function Carousel(props: CarouselProps) {
     onIndictClick && onIndictClick(index);
   }
 
+  function handleOnNextClick() {
+    goToSlide(currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1);
+  }
+
+  function handleOnPrevClick() {
+    goToSlide(
+      currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
+    );
+  }
+
+  const controls = (
+    <>
+      <button
+        aria-label="previous"
+        className="carousel__control-prev"
+        onClick={handleOnPrevClick}
+      >
+        <svg>
+          <use href={`${icons}#icon-chevron-thin-down`}></use>
+        </svg>
+      </button>
+      <button
+        aria-label="next"
+        className="carousel__control-next"
+        onClick={handleOnNextClick}
+      >
+        <svg>
+          <use href={`${icons}#icon-chevron-thin-down`}></use>
+        </svg>
+      </button>
+    </>
+  );
+
+  const indicators = (
+    <div className="carousel__indicators">
+      {Indicator &&
+        items.map((_, i) => (
+          <Indicator
+            key={i}
+            index={i}
+            className={`carousel__indicator ${
+              currentIndex === i ? "active" : ""
+            }`}
+            onClick={handleOnIndicatorClick.bind(null, i)}
+          />
+        ))}
+      {!Indicator &&
+        items.map((_, i) => (
+          <button
+            aria-label="slide-indicator-button"
+            key={i}
+            className={`carousel__indicator ${
+              currentIndex === i ? "active" : ""
+            }`}
+            onClick={handleOnIndicatorClick.bind(null, i)}
+          ></button>
+        ))}
+    </div>
+  );
+
   return (
-    <div className={`carousel carousel--${type} ${className ? className : ""}`}>
+    <div
+      className={`carousel carousel--${direction} ${className ? className : ""} ${animationType}`}
+    >
       <ul className="carousel__content">
         {items.map((item, i) => (
           <li
@@ -156,30 +223,14 @@ function Carousel(props: CarouselProps) {
           </li>
         ))}
       </ul>
-      <div className="carousel__indicators">
-        {Indicator &&
-          items.map((_, i) => (
-            <Indicator
-              key={i}
-              index={i}
-              className={`carousel__indicator ${
-                currentIndex === i ? "active" : ""
-              }`}
-              onClick={handleOnIndicatorClick.bind(null, i)}
-            />
-          ))}
-        {!Indicator &&
-          items.map((_, i) => (
-            <button
-              aria-label="slide-indicator-button"
-              key={i}
-              className={`carousel__indicator ${
-                currentIndex === i ? "active" : ""
-              }`}
-              onClick={handleOnIndicatorClick.bind(null, i)}
-            ></button>
-          ))}
-      </div>
+      {type === "controls" && controls}
+      {type === "indicator" && indicators}
+      {type === "both" && (
+        <>
+          {controls}
+          {indicators}
+        </>
+      )}
     </div>
   );
 }

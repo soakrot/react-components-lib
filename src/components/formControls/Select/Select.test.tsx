@@ -1,6 +1,7 @@
 import { screen, renderHook } from "@testing-library/react";
 import { setup } from "../../../utils/test-utils";
-import Select, { SelectOption } from "./Select";
+import Select from "./Select";
+import type { SelectOption } from "./Select";
 import { useState } from "react";
 
 describe("Select component", () => {
