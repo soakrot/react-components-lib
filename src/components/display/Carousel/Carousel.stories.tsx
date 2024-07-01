@@ -32,8 +32,8 @@ const items = new Array(3).fill(null).map((_, i) => (
 ));
 
 const Default: Story = {
-  render: () => {
-    return <Carousel className="default-story" items={items} />;
+  render: (args) => {
+    return <Carousel {...args} className="default-story" items={items} />;
   },
 };
 

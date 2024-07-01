@@ -1,13 +1,13 @@
 import {
   ComponentType,
   MouseEventHandler,
-  TouchEvent,
   useEffect,
   useRef,
   useState,
 } from "react";
 import "./Carousel.css";
 import icons from "/assets/icons-sprite.svg";
+import { useTouchSwipe } from "../../../hooks";
 
 export type IndicatorProps = {
   className: string;
@@ -50,7 +50,6 @@ function Carousel(props: CarouselProps) {
 
   useEffect(() => {
     if (slides.current[0]) {
-      // toggleSlide(slides.current[0]);
       slides.current[0].classList.add("carousel-active");
     }
   }, []);
@@ -91,9 +90,47 @@ function Carousel(props: CarouselProps) {
     return intervalID;
   }
   //
+  // useTouchSwipe(currentIndex, slidesContainerRef, items.length, onTouchSwipeHandler);
+  const bindToCarouselContent = useTouchSwipe(
+    onTouchSwipeLeftHandler,
+    onTouchSwipeRightHandler
+  );
 
-  function goToSlide(index: number) {
-    const nextIndex = index;
+  function handleOnIndicatorClick(i: number) {
+    goToSlide(i);
+    onIndictClick && onIndictClick(i);
+  }
+
+  function handleOnNextClick() {
+    goToSlide(currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1);
+    onControlsClick && onControlsClick(currentIndex);
+  }
+
+  function handleOnPrevClick() {
+    goToSlide(
+      currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
+    );
+    onControlsClick && onControlsClick(currentIndex);
+  }
+
+  function onTouchSwipeLeftHandler() {
+    onTouchSwipeHandler(currentIndex === 0 ? 0 : currentIndex - 1);
+  }
+
+  function onTouchSwipeRightHandler() {
+    const lastSlideIndex = items.length - 1;
+    onTouchSwipeHandler(
+      currentIndex >= lastSlideIndex ? lastSlideIndex : currentIndex + 1
+    );
+  }
+
+  function onTouchSwipeHandler(i: number) {
+    goToSlide(i);
+    onSwipe && onSwipe(i);
+  }
+
+  function goToSlide(i: number) {
+    const nextIndex = i;
     const currentSlide = slides.current[currentIndex];
     const nextSlide = slides.current[nextIndex];
     if (currentIndex === nextIndex) {
@@ -106,10 +143,6 @@ function Carousel(props: CarouselProps) {
       moveToStart(currentSlide, nextSlide);
     }
     setCurrentIndex(nextIndex);
-  }
-
-  function toggleSlide(slide: Element) {
-    slide.classList.toggle("carousel-active");
   }
 
   function moveToEnd(currentSlide: Element, nextSlide: Element) {
@@ -144,47 +177,12 @@ function Carousel(props: CarouselProps) {
     );
   }
 
-  function pushToSlidesRef(index: number, el: HTMLLIElement) {
-    slides.current[index] = el;
+  function toggleSlide(slide: Element) {
+    slide.classList.toggle("carousel-active");
   }
 
-  function handleOnIndicatorClick(index: number) {
-    goToSlide(index);
-    onIndictClick && onIndictClick(index);
-  }
-
-  function handleOnNextClick() {
-    goToSlide(currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1);
-    onControlsClick && onControlsClick(currentIndex);
-  }
-
-  function handleOnPrevClick() {
-    goToSlide(
-      currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
-    );
-    onControlsClick && onControlsClick(currentIndex);
-  }
-
-  function handleOnItemTouchEnd(e: TouchEvent<HTMLLIElement>) {
-    e.preventDefault();
-    const sliderX = slides.current[currentIndex].offsetWidth / 2;
-    const touchX = e.changedTouches[0].clientX;
-    if (touchX > sliderX) {
-      // Swipe right
-      goToSlide(
-        currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1
-      );
-      onSwipe && onSwipe(currentIndex);
-      return;
-    }
-    if (touchX < sliderX) {
-      // Swipe left
-      goToSlide(
-        currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
-      );
-      onSwipe && onSwipe(currentIndex);
-      return;
-    }
+  function pushToSlidesRef(i: number, el: HTMLLIElement) {
+    slides.current[i] = el;
   }
 
   const controls = (
@@ -241,13 +239,12 @@ function Carousel(props: CarouselProps) {
     <div
       className={`carousel carousel--${direction} ${className ? className : ""} ${animationType}`}
     >
-      <ul className="carousel__content">
+      <ul className="carousel__content" {...bindToCarouselContent}>
         {items.map((item, i) => (
           <li
             key={i}
             className="carousel__item"
             ref={pushToSlidesRef.bind(null, i)}
-            onTouchEnd={handleOnItemTouchEnd}
           >
             {item}
           </li>
