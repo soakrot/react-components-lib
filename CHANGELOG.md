@@ -1,3 +1,10 @@
+# [3.11.0](https://github.com/crazysammich/react-components-lib/compare/v3.10.1...v3.11.0) (2024-07-01)
+
+
+### Features
+
+* add useTouchSwipe hook to handle swipe gesture ([18c0cf3](https://github.com/crazysammich/react-components-lib/commit/18c0cf34694a4a3626bdd93d68bb46cc18898a43))
+
 ## [3.10.1](https://github.com/crazysammich/react-components-lib/compare/v3.10.0...v3.10.1) (2024-06-27)
 
 

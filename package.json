@@ -1,6 +1,6 @@
 {
   "name": "@crazysammich/react-components-lib",
-  "version": "3.10.1",
+  "version": "3.11.0",
   "description": "Simple React components library",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
