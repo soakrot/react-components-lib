@@ -28,10 +28,8 @@ function useTouchSwipe<T extends HTMLElement>(onLeft: anonFn, onRight: anonFn) {
     if (ms > 200 && !isGestureOver) return;
     if (dir < 1) {
       onRight();
-      console.log("right");
     } else if (dir > 1) {
       onLeft();
-      console.log("left");
     }
     ms = 0;
     px = 0;
