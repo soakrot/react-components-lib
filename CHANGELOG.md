@@ -1,3 +1,5 @@
+## [3.11.2](https://github.com/crazysammich/react-components-lib/compare/v3.11.1...v3.11.2) (2024-07-03)
+
 ## [3.11.1](https://github.com/crazysammich/react-components-lib/compare/v3.11.0...v3.11.1) (2024-07-03)
 
 # [3.11.0](https://github.com/crazysammich/react-components-lib/compare/v3.10.1...v3.11.0) (2024-07-01)
