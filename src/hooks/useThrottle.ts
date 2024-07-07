@@ -1,20 +1,23 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
-function useThrottle() {
-  const lastExecTime = useRef(0);
-  const pendingArgs = useRef<[]>([]);
-  const throttledFn = (cb: () => void, delay = 1) => {
-    return (...args: []) => {
-      const now = Date.now();
-      const a = pendingArgs.current.length > 0 ? pendingArgs.current : args;
-      if (now - lastExecTime.current >= delay * 1000) {
-        cb(...a);
+function useThrottle<T>(cb: (...args: T[]) => void, limit = 1000) {
+  const lastExecTime = useRef(Date.now());
+  const timer = useRef<NodeJS.Timeout>();
+  function throttledFn(...args: []) {
+    const now = Date.now();
+    if (now - lastExecTime.current >= limit) {
+      cb(...args);
+      lastExecTime.current = now;
+    } else {
+      timer.current = setTimeout(() => {
+        cb(...args);
         lastExecTime.current = now;
-      } else {
-        pendingArgs.current = args;
-      }
-    };
-  };
+      }, limit);
+    }
+  }
+
+  useEffect(() => clearTimeout(timer.current), [limit]);
+
   return throttledFn;
 }
 
