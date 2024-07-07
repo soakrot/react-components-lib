@@ -4,3 +4,5 @@ export { default as useClickOutside } from "./useClickOutside";
 export { default as useInput } from "./useInput";
 export { default as useTouchSwipe } from "./useTouchSwipe";
 export { default as useThrottle } from "./useThrottle";
+export { default as useDebounceValue } from "./useDebounceValue";
+export { default as useThrottleValue } from "./useThrottleValue";
