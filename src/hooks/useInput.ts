@@ -10,18 +10,18 @@ function useInput<T extends HTMLInputElement>(
   const isEnteredValueValid = ValidateInputFn(inputValue);
   const hasError = !isEnteredValueValid && wasInputTouched;
 
-  const handleChangeInput = (e: ChangeEvent<T>) => {
+  function handleChangeInput(e: ChangeEvent<T>) {
     setInputValue(e.target.value);
-  };
+  }
 
-  const handleBlurInput = () => {
+  function handleBlurInput() {
     setWasInputTouched(true);
-  };
+  }
 
-  const resetInput = () => {
+  function resetInput() {
     setInputValue("");
     setWasInputTouched(false);
-  };
+  }
 
   return {
     value: inputValue,
