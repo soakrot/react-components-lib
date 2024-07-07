@@ -3,3 +3,4 @@ export { default as useRovingFocus } from "./useRovingFocus";
 export { default as useClickOutside } from "./useClickOutside";
 export { default as useInput } from "./useInput";
 export { default as useTouchSwipe } from "./useTouchSwipe";
+export { default as useThrottle } from "./useThrottle";
