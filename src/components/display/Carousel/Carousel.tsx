@@ -46,7 +46,7 @@ function Carousel(props: CarouselProps) {
     autoPlay,
     animationType = "slide",
     className,
-    currentIndexArg,
+    currentIndexArg = null,
     direction = "horizontal",
     type = "controls",
     Indicator,
@@ -77,7 +77,8 @@ function Carousel(props: CarouselProps) {
   }, [currentIndex, autoPlay?.auto]);
 
   useEffect(() => {
-    if (currentIndexArg) {
+    if (currentIndexArg === null) return;
+    if (currentIndexArg >= 0) {
       goToSlide(currentIndexArg);
     }
   }, [currentIndexArg]);

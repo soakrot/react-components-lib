@@ -1,3 +1,18 @@
+# [3.12.0](https://github.com/crazysammich/react-components-lib/compare/v3.11.2...v3.12.0) (2024-07-08)
+
+
+### Features
+
+* add onCarouselChange prop to Carousel and adjust some props ([898485b](https://github.com/crazysammich/react-components-lib/commit/898485bf27d2b5cf349d97e00aad2bfba1724979))
+* add useDebounceValue and useThrottleValue ([28c1c5a](https://github.com/crazysammich/react-components-lib/commit/28c1c5af3456e27304b677fd4506867d95e91ae7))
+* add useThrottle hook ([a7630d7](https://github.com/crazysammich/react-components-lib/commit/a7630d7a8ba9f4e63f964b9680794b37b3eb255f))
+
+
+### Performance Improvements
+
+* pass the touch event to useTouchSwipe handlers ([02f8122](https://github.com/crazysammich/react-components-lib/commit/02f81225fd4d8f473fe5c30c7f29d2d705e706a5))
+* update useThrottle hook to return a function with args ([3a8f6f7](https://github.com/crazysammich/react-components-lib/commit/3a8f6f72b4fe8825562517c0e4db043c674ea199))
+
 ## [3.11.2](https://github.com/crazysammich/react-components-lib/compare/v3.11.1...v3.11.2) (2024-07-03)
 
 ## [3.11.1](https://github.com/crazysammich/react-components-lib/compare/v3.11.0...v3.11.1) (2024-07-03)
