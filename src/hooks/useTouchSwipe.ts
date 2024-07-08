@@ -1,7 +1,7 @@
 import { TouchEvent } from "react";
 
-type anonFn = () => void;
-function useTouchSwipe<T extends HTMLElement>(onLeft: anonFn, onRight: anonFn) {
+type anonFn<T = HTMLElement> = (e?: TouchEvent<T>) => void;
+function useTouchSwipe<T = HTMLElement>(onLeft: anonFn<T>, onRight: anonFn<T>) {
   let vx = 0;
   // Pointer position on vector x
   let px = 0;
@@ -27,9 +27,9 @@ function useTouchSwipe<T extends HTMLElement>(onLeft: anonFn, onRight: anonFn) {
     clearInterval(minGestureTime);
     if (ms > 200 && !isGestureOver) return;
     if (dir < 1) {
-      onRight();
+      onRight(e);
     } else if (dir > 1) {
-      onLeft();
+      onLeft(e);
     }
     ms = 0;
     px = 0;
