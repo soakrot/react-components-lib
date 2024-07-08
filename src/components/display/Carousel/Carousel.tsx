@@ -77,8 +77,7 @@ function Carousel(props: CarouselProps) {
   }, [currentIndex, autoPlay?.auto]);
 
   useEffect(() => {
-    if (currentIndexArg === null) return;
-    if (currentIndexArg >= 0) {
+    if (currentIndexArg !== null) {
       goToSlide(currentIndexArg);
     }
   }, [currentIndexArg]);
