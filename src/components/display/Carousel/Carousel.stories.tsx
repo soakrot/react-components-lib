@@ -10,20 +10,10 @@ import { Image } from "../../media";
 const meta: Meta<typeof Carousel> = {
   title: "Display/Carousel",
   component: Carousel,
+  tags: ["autodocs"],
 };
 
 type Story = StoryObj<typeof Carousel>;
-
-const ImagesSlider: Story = {
-  render: () => {
-    const items = [
-      <Image src={img1} alt="image of space" />,
-      <Image src={img2} alt="image of space" />,
-      <Image src={img3} alt="image of space" />,
-    ];
-    return <Carousel items={items} />;
-  },
-};
 
 const items = new Array(3).fill(null).map((_, i) => (
   <div className={`slider ${i === 1 ? "slider--dark" : ""}`}>
@@ -32,6 +22,11 @@ const items = new Array(3).fill(null).map((_, i) => (
 ));
 
 const Default: Story = {
+  args: {
+    autoPlay: {
+      auto: true,
+    },
+  },
   render: (args) => {
     return <Carousel {...args} className="default-story" items={items} />;
   },
@@ -74,6 +69,17 @@ const WithCustomIndicators: Story = {
   },
 };
 
+const ImagesCarousel: Story = {
+  render: () => {
+    const items = [
+      <Image src={img1} alt="image of space" />,
+      <Image src={img2} alt="image of space" />,
+      <Image src={img3} alt="image of space" />,
+    ];
+    return <Carousel items={items} />;
+  },
+};
+
 export default meta;
 export {
   Default,
@@ -81,6 +87,6 @@ export {
   Vertical,
   Indicator,
   IndicatorAndControls,
-  ImagesSlider,
+  ImagesCarousel,
   WithCustomIndicators,
 };

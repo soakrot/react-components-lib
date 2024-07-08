@@ -1,6 +1,9 @@
 import {
   ComponentType,
+  MouseEvent,
   MouseEventHandler,
+  SyntheticEvent,
+  TouchEvent,
   useEffect,
   useRef,
   useState,
@@ -15,37 +18,46 @@ export type IndicatorProps = {
   onClick: MouseEventHandler;
 };
 
+type OnHandlerFn<E = SyntheticEvent> = (i: number, e?: E) => void;
+
 interface CarouselProps {
+  items: JSX.Element[];
   autoPlay?: {
     auto: boolean;
     delay?: number;
     direction?: "forward" | "backward";
   };
   className?: string;
-  items: JSX.Element[];
+  currentIndexArg?: number;
   direction?: "horizontal" | "vertical";
   type?: "controls" | "indicator" | "both";
   animationType?: "slide" | "fade";
   Indicator?: ComponentType<IndicatorProps>;
-  onIndictClick?: (i: number) => void;
-  onControlsClick?: (i: number) => void;
-  onSwipe?: (i: number) => void;
+  onCarouselChange?: (i: number) => void;
+  onCarouselClick?: OnHandlerFn<MouseEvent>;
+  onIndictClick?: OnHandlerFn<MouseEvent>;
+  onControlsClick?: OnHandlerFn<MouseEvent>;
+  onSwipe?: OnHandlerFn<TouchEvent>;
 }
 
 function Carousel(props: CarouselProps) {
   const {
+    items,
     autoPlay,
     animationType = "slide",
     className,
-    items,
+    currentIndexArg,
     direction = "horizontal",
     type = "controls",
     Indicator,
+    onCarouselChange,
     onIndictClick,
     onControlsClick,
     onSwipe,
   } = props;
+
   const [currentIndex, setCurrentIndex] = useState(0);
+  const activeSlide = currentIndexArg || currentIndex;
   const slides = useRef<HTMLLIElement[]>([]);
 
   useEffect(() => {
@@ -63,24 +75,24 @@ function Carousel(props: CarouselProps) {
     return () => {
       clearInterval(intervalID);
     };
-  }, [currentIndex]);
+  }, [activeSlide, autoPlay?.auto]);
 
   function autoPlayCarousel() {
     const intervalID = setInterval(
       () => {
         switch (autoPlay?.direction ?? "forward") {
           case "forward":
-            if (currentIndex + 1 > items.length - 1) {
+            if (activeSlide + 1 > items.length - 1) {
               goToSlide(0);
             } else {
-              goToSlide(currentIndex + 1);
+              goToSlide(activeSlide + 1);
             }
             break;
           case "backward":
-            if (currentIndex - 1 < 0) {
+            if (activeSlide - 1 < 0) {
               goToSlide(items.length - 1);
             } else {
-              goToSlide(currentIndex - 1);
+              goToSlide(activeSlide - 1);
             }
             break;
         }
@@ -90,7 +102,7 @@ function Carousel(props: CarouselProps) {
     return intervalID;
   }
   //
-  // useTouchSwipe(currentIndex, slidesContainerRef, items.length, onTouchSwipeHandler);
+
   const bindToCarouselContent = useTouchSwipe(
     onTouchSwipeLeftHandler,
     onTouchSwipeRightHandler
@@ -98,48 +110,55 @@ function Carousel(props: CarouselProps) {
 
   function handleOnIndicatorClick(i: number) {
     goToSlide(i);
+    onCarouselChange && onCarouselChange(i);
     onIndictClick && onIndictClick(i);
   }
 
   function handleOnNextClick() {
-    goToSlide(currentIndex >= slides.current.length - 1 ? 0 : currentIndex + 1);
-    onControlsClick && onControlsClick(currentIndex);
+    const newIndex =
+      activeSlide >= slides.current.length - 1 ? 0 : activeSlide + 1;
+    goToSlide(newIndex);
+    onCarouselChange && onCarouselChange(newIndex);
+    onControlsClick && onControlsClick(activeSlide);
   }
 
   function handleOnPrevClick() {
-    goToSlide(
-      currentIndex === 0 ? slides.current.length - 1 : currentIndex - 1
-    );
-    onControlsClick && onControlsClick(currentIndex);
+    const newIndex =
+      activeSlide === 0 ? slides.current.length - 1 : activeSlide - 1;
+    goToSlide(newIndex);
+    onCarouselChange && onCarouselChange(newIndex);
+    onControlsClick && onControlsClick(activeSlide);
   }
 
-  function onTouchSwipeLeftHandler() {
-    onTouchSwipeHandler(currentIndex === 0 ? 0 : currentIndex - 1);
+  function onTouchSwipeLeftHandler(e?: TouchEvent) {
+    onTouchSwipeHandler(activeSlide === 0 ? 0 : activeSlide - 1, e);
   }
 
-  function onTouchSwipeRightHandler() {
+  function onTouchSwipeRightHandler(e?: TouchEvent) {
     const lastSlideIndex = items.length - 1;
     onTouchSwipeHandler(
-      currentIndex >= lastSlideIndex ? lastSlideIndex : currentIndex + 1
+      activeSlide >= lastSlideIndex ? lastSlideIndex : activeSlide + 1,
+      e
     );
   }
 
-  function onTouchSwipeHandler(i: number) {
+  function onTouchSwipeHandler(i: number, e?: TouchEvent) {
     goToSlide(i);
-    onSwipe && onSwipe(i);
+    onCarouselChange && onCarouselChange(i);
+    onSwipe && onSwipe(i, e);
   }
 
   function goToSlide(i: number) {
     const nextIndex = i;
-    const currentSlide = slides.current[currentIndex];
+    const currentSlide = slides.current[activeSlide];
     const nextSlide = slides.current[nextIndex];
-    if (currentIndex === nextIndex) {
+    if (activeSlide === nextIndex) {
       return;
     }
-    if (nextIndex < currentIndex) {
+    if (nextIndex < activeSlide) {
       moveToEnd(currentSlide, nextSlide);
     }
-    if (nextIndex > currentIndex) {
+    if (nextIndex > activeSlide) {
       moveToStart(currentSlide, nextSlide);
     }
     setCurrentIndex(nextIndex);
@@ -216,7 +235,7 @@ function Carousel(props: CarouselProps) {
             key={i}
             index={i}
             className={`carousel__indicator ${
-              currentIndex === i ? "active" : ""
+              activeSlide === i ? "active" : ""
             }`}
             onClick={handleOnIndicatorClick.bind(null, i)}
           />
@@ -227,7 +246,7 @@ function Carousel(props: CarouselProps) {
             aria-label="slide-indicator-button"
             key={i}
             className={`carousel__indicator ${
-              currentIndex === i ? "active" : ""
+              activeSlide === i ? "active" : ""
             }`}
             onClick={handleOnIndicatorClick.bind(null, i)}
           ></button>
