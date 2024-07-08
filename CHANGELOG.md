@@ -1,3 +1,10 @@
+## [3.12.2](https://github.com/crazysammich/react-components-lib/compare/v3.12.1...v3.12.2) (2024-07-08)
+
+
+### Bug Fixes
+
+* currentIndexArg prop not triggering useEffect if equal to zero ([e2567e8](https://github.com/crazysammich/react-components-lib/commit/e2567e8f44a0a922337ce8c769e3734731e81f3d))
+
 ## [3.12.1](https://github.com/crazysammich/react-components-lib/compare/v3.12.0...v3.12.1) (2024-07-08)
 
 
