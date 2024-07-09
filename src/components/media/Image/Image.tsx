@@ -1,4 +1,4 @@
-import { AriaAttributes, SyntheticEvent, useState } from "react";
+import { AriaAttributes, forwardRef, SyntheticEvent, useState } from "react";
 import classes from "./Image.module.css";
 
 export type ImgDimensions = { width: number; height: number };
@@ -13,8 +13,8 @@ interface ImageProps extends AriaAttributes {
   loading?: "lazy" | "eager";
   onLoad?: (e: SyntheticEvent<HTMLImageElement>) => void;
 }
-
-function Image(props: ImageProps) {
+type Ref = HTMLImageElement;
+const Image = forwardRef<Ref, ImageProps>((props, ref) => {
   const {
     alt,
     src,
@@ -51,9 +51,10 @@ function Image(props: ImageProps) {
       onLoad={handleOnImgLoad}
       // private
       decoding="async"
+      ref={ref}
       {...otherProps}
     />
   );
-}
+});
 
 export default Image;
