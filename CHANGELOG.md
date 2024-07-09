@@ -1,3 +1,12 @@
+# [3.13.0](https://github.com/crazysammich/react-components-lib/compare/v3.12.2...v3.13.0) (2024-07-09)
+
+
+### Features
+
+* add ProductGallery component ([71b0f0e](https://github.com/crazysammich/react-components-lib/commit/71b0f0e2bad2ae1cb54ce2d9c417450ade2db1b7))
+* add zoom prop in ProductGallery to control zoom preview ([8a894b0](https://github.com/crazysammich/react-components-lib/commit/8a894b0523b241e3001df57eb500fa6bfa41b3c9))
+* complete implementation of ProductGallery ([4596289](https://github.com/crazysammich/react-components-lib/commit/45962891a508caec6bb1c53c42fd8c4a78e95e5c))
+
 ## [3.12.2](https://github.com/crazysammich/react-components-lib/compare/v3.12.1...v3.12.2) (2024-07-08)
 
 
