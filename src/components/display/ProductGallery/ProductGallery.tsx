@@ -10,12 +10,12 @@ export type ProductImg = {
 interface ProductGalleryProps {
   productImgs: ProductImg[];
   className?: string;
-  zoomLvl: number;
+  zoom?: 1 | 2 | 3 | 4;
   onThumbClick?: MouseEventHandler;
 }
 
 function ProductGallery(props: ProductGalleryProps) {
-  const { productImgs, className, onThumbClick } = props;
+  const { productImgs, className, zoom = 1, onThumbClick } = props;
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [isZoomed, setIsZoom] = useState(false);
   const productGalleryRef = useRef<HTMLDivElement>(null);
@@ -32,10 +32,13 @@ function ProductGallery(props: ProductGalleryProps) {
     e.preventDefault();
     if (!heroImgRef.current || !zoomPreviewRef.current) return;
     let x, y;
+    // max zoom level - 100 * (zoom - 1 | zoom - 1 === 0 ? 1)
+    const zoomLvl = 400 - 100 * (zoom - 1 || 1);
+    // Gets pointer's position
     const pos = getCursorPosition(e);
     const img = heroImgRef.current;
     // lens size
-    const lensOffset = { width: 200, height: 200 };
+    const lensOffset = { width: zoomLvl, height: zoomLvl };
     // Lens position
     x = pos.x - lensOffset.width / 2;
     y = pos.y - lensOffset.height / 2;
