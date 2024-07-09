@@ -10,16 +10,18 @@ export type ProductImg = {
 interface ProductGalleryProps {
   productImgs: ProductImg[];
   className?: string;
+  zoomLvl: number;
   onThumbClick?: MouseEventHandler;
 }
 
 function ProductGallery(props: ProductGalleryProps) {
   const { productImgs, className, onThumbClick } = props;
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const [isZoom, setIsZoom] = useState(false);
-  const heroImgRef = useRef<HTMLImageElement>(null);
+  const [isZoomed, setIsZoom] = useState(false);
+  const productGalleryRef = useRef<HTMLDivElement>(null);
   const heroImgContainerRef = useRef<HTMLDivElement>(null);
-  // const lensRef = useRef<HTMLDivElement>(null);
+  const heroImgRef = useRef<HTMLImageElement>(null);
+  const zoomPreviewRef = useRef<HTMLDivElement>(null);
 
   function handleOnThumbClick(i: number, e: MouseEvent<HTMLLIElement>) {
     onThumbClick && onThumbClick(e);
@@ -27,20 +29,54 @@ function ProductGallery(props: ProductGalleryProps) {
   }
 
   function handleOnMouseMove(e: MouseEvent<HTMLImageElement>) {
-    if (!heroImgRef.current) return;
+    e.preventDefault();
+    if (!heroImgRef.current || !zoomPreviewRef.current) return;
+    let x, y;
     const pos = getCursorPosition(e);
-    const y = pos.y - heroImgRef.current?.offsetHeight / 2;
-    const x = pos.x - heroImgRef.current?.offsetWidth / 2;
-    heroImgRef.current?.style.setProperty("left", `${x}px`);
-    heroImgRef.current?.style.setProperty("top", `${y}px`);
+    const img = heroImgRef.current;
+    // lens size
+    const lensOffset = { width: 200, height: 200 };
+    // Lens position
+    x = pos.x - lensOffset.width / 2;
+    y = pos.y - lensOffset.height / 2;
+    // Calculate the ratio between zoom preview and the lens
+    const cx = zoomPreviewRef.current?.offsetWidth / lensOffset.width;
+    const cy = zoomPreviewRef.current?.offsetHeight / lensOffset.height;
+    // Prevent the lens from being positioned outside the image
+    if (x > img.width - lensOffset.width) {
+      x = img.width - lensOffset.width;
+    }
+    if (x < 0) {
+      x = 0;
+    }
+    if (y > img.height - lensOffset.height) {
+      y = img.height - lensOffset.height;
+    }
+    if (y < 0) {
+      y = 0;
+    }
+    zoomPreviewRef.current?.style.setProperty(
+      "background-image",
+      `url('${img.src}')`
+    );
+    zoomPreviewRef.current.style.setProperty(
+      "background-size",
+      `${img.width * cx}px ${img.height * cy}px`
+    );
+    zoomPreviewRef.current?.style.setProperty(
+      "background-position",
+      `-${x * cx}px -${y * cy}px`
+    );
   }
 
   function getCursorPosition(e: MouseEvent) {
     if (!heroImgContainerRef.current) return { x: 0, y: 0 };
-    const y =
-      e.pageY - heroImgContainerRef.current?.getBoundingClientRect().top;
-    const x =
-      e.pageX - heroImgContainerRef.current?.getBoundingClientRect().left;
+    let y = 0,
+      x = 0;
+    x = e.pageX - heroImgContainerRef.current?.getBoundingClientRect().left;
+    y = e.pageY - heroImgContainerRef.current?.getBoundingClientRect().top;
+    x = x - window.scrollX;
+    y = y - window.scrollY;
     return {
       y,
       x,
@@ -48,7 +84,13 @@ function ProductGallery(props: ProductGalleryProps) {
   }
 
   return (
-    <div className={`product-gallery ${className || ""}`}>
+    <div
+      className={`product-gallery ${className || ""}`}
+      ref={productGalleryRef}
+    >
+      {isZoomed && (
+        <div className="product-gallery__zoom" ref={zoomPreviewRef}></div>
+      )}
       <div
         className="product-gallery__hero"
         ref={heroImgContainerRef}
@@ -57,7 +99,6 @@ function ProductGallery(props: ProductGalleryProps) {
         onMouseLeave={() => setIsZoom(false)}
       >
         <Image
-          className={isZoom ? "zoom" : ""}
           src={productImgs[currentImgIndex].hero}
           alt={productImgs[currentImgIndex].alt}
           ref={heroImgRef}

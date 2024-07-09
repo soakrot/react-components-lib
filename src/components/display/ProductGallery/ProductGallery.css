@@ -4,12 +4,13 @@
 
 .product-gallery__hero {
   position: relative;
-  cursor: move;
   width: 100%;
-  min-height: 200px;
+  min-height: 46vw;
 
   > img.zoom {
     max-width: initial;
+    width: auto;
+    height: auto;
     position: absolute;
   }
 }
@@ -23,6 +24,16 @@
     opacity: 0.5;
     border: 1px solid royalblue;
   }
+}
+
+.product-gallery__zoom {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  border: 1px solid black;
+  width: 500px;
+  height: 500px;
+  background-repeat: no-repeat;
 }
 
 .product-gallery__hero,
