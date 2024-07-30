@@ -1,4 +1,4 @@
-.tabsContainer {
+.tabs-container {
 }
 
 .tabs {
@@ -6,11 +6,6 @@
   justify-content: center;
   column-gap: 1.625rem;
   list-style: none;
-  font-family: var(--font-subheading), sans-serif;
-}
-
-.tabContent {
-  color: var(--text-primary);
 }
 
 .tab {
@@ -21,26 +16,32 @@
   border-block-end: solid var(--border-hover-color);
 }
 
-.tab.active button {
-  color: white;
+.tab.active {
+  background-color: rgb(165, 165, 165);
 }
 
 .tab.active {
   border-block-end: 3px solid var(--border-color-primary);
 }
 
-.tab button {
-  border: 0;
-  cursor: pointer;
-  font-size: 1rem;
-  color: var(--text-primary);
-  letter-spacing: 2.7px;
+.tab {
   text-transform: uppercase;
-  background: transparent;
+}
+
+.tab-content {
+  color: var(--text-primary);
+}
+
+.tabpanel {
+  display: none;
+}
+
+.tabpanel-active {
+  display: block;
 }
 
 @media only screen and (min-width: 48em) {
-  .tabsContainer {
+  .tabs-container {
     width: min(35.8125rem, max(27.812rem, 90%));
   }
 }
