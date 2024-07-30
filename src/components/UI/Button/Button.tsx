@@ -8,7 +8,7 @@ import "./Button.css";
 interface ButtonProps extends ComponentPropsWithRef<"button"> {
   className?: string;
   children?: ReactNode;
-  varient?: "primary" | "secondary";
+  variant?: "primary" | "secondary";
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -18,14 +18,14 @@ const Button = React.forwardRef<Ref, ButtonProps>(function (props, ref) {
   const {
     className,
     children,
-    varient = "primary",
+    variant = "primary",
     onClick,
     ...otherProps
   } = props;
   return (
     <button
       {...otherProps}
-      className={`btn ${className ? className : ""} btn-${varient}`}
+      className={`btn btn-${variant} ${className ? className : ""}`}
       onClick={onClick}
       ref={ref}
     >
