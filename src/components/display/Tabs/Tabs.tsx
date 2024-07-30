@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Tabs.css";
 import { useRovingFocus } from "../../../hooks";
 import { Button } from "../../UI";
@@ -9,18 +9,31 @@ export type Tab = {
 };
 
 interface TabsProps {
-  className?: string;
   tabs: Tab[];
+  className?: string;
+  tabVariant?: "underline" | "button";
   onTabChange?: (title: string) => void;
 }
 
-function Tabs({ tabs, className, onTabChange }: TabsProps) {
+function Tabs(props: TabsProps) {
+  const { tabs, className, tabVariant = "underline", onTabChange } = props;
   const [activeTab, setActiveTab] = useState(0);
   const tabsRef = useRef<HTMLButtonElement[]>([]);
+  const lineRef = useRef<HTMLSpanElement>(null);
   const { currentFocus, handleOnKeybrPress } = useRovingFocus<HTMLUListElement>(
     tabsRef,
     handleOnEnterPress
   );
+
+  useEffect(() => {
+    const activeTabWidth = tabsRef.current[activeTab].offsetWidth;
+    const activeTabPos = {
+      left: tabsRef.current[activeTab].getBoundingClientRect().left,
+    };
+
+    lineRef.current?.style.setProperty("width", activeTabWidth + "px");
+    lineRef.current?.style.setProperty("left", activeTabPos.left + "px");
+  }, [activeTab]);
 
   function handleOnTabClick(index: number) {
     setActiveTab(index);
@@ -43,7 +56,7 @@ function Tabs({ tabs, className, onTabChange }: TabsProps) {
           <li key={i} role="presentation">
             <Button
               id={`tab-${i + 1}`}
-              className={`tab ${i === activeTab ? "active" : ""}`}
+              className={`tab ${tabVariant === "button" ? "tab-btn" : "tab-underline"} ${i === activeTab ? "active" : ""}`}
               role="tab"
               ref={(el: HTMLButtonElement) => (tabsRef.current[i] = el)}
               tabIndex={currentFocus === i ? 0 : -1}
@@ -56,6 +69,9 @@ function Tabs({ tabs, className, onTabChange }: TabsProps) {
           </li>
         ))}
       </ul>
+      {tabVariant === "underline" && (
+        <span className="line" ref={lineRef}></span>
+      )}
       <div className="tab-content">
         {tabs.map((tab, i) => (
           <div

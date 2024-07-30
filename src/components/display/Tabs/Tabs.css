@@ -1,5 +1,6 @@
-.tabs-container {
-}
+/* .tabs-container {
+
+} */
 
 .tabs {
   display: flex;
@@ -10,22 +11,24 @@
 
 .tab {
   padding-block: 0.75rem;
+  text-transform: uppercase;
 }
 
 .tab:hover {
   border-block-end: solid var(--border-hover-color);
 }
 
-.tab.active {
+.tab.tab-btn.active {
   background-color: rgb(165, 165, 165);
 }
 
-.tab.active {
-  border-block-end: 3px solid var(--border-color-primary);
-}
+.btn.tab.tab-underline {
+  border-radius: 0;
+  background: transparent;
 
-.tab {
-  text-transform: uppercase;
+  &:active {
+    outline: 0;
+  }
 }
 
 .tab-content {
@@ -38,6 +41,14 @@
 
 .tabpanel-active {
   display: block;
+}
+
+.line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transition: left 150ms ease-out;
 }
 
 @media only screen and (min-width: 48em) {
