@@ -38,12 +38,12 @@ function Select(props: SelectProps) {
   const selectLabel = `select-label-${randID()}`;
   const selectMenuID = `select-options-${randID()}`;
   // Add keyboard navigation support to select menu.
-  const { currentFocus, setCurrentFocus, setIsKeyboardActive } = useRovingFocus(
-    selectRef,
-    optionsRef,
-    handleEnterKeyPress,
-    handleEscapeKeyPress
-  );
+  const {
+    currentFocus,
+    setCurrentFocus,
+    setIsKeyboardActive,
+    handleOnKeybrPress,
+  } = useRovingFocus(optionsRef, handleEnterKeyPress, handleEscapeKeyPress);
 
   /* On-click handlers */
   useClickOutside(selectRef, () => setIsOpen(false));
@@ -111,7 +111,10 @@ function Select(props: SelectProps) {
   }, [isOpen]);
 
   return (
-    <div className={`select-container ${className ? className : ""}`}>
+    <div
+      className={`select-container ${className ? className : ""}`}
+      onKeyDown={handleOnKeybrPress}
+    >
       <label
         className="select-label"
         aria-label={label}
