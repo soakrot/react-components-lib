@@ -1,19 +1,31 @@
-import React, { MouseEventHandler, ReactNode } from "react";
+import React, {
+  ComponentPropsWithRef,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 import "./Button.css";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentPropsWithRef<"button"> {
   className?: string;
   children?: ReactNode;
+  varient?: "primary" | "secondary";
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 type Ref = HTMLButtonElement;
 
 const Button = React.forwardRef<Ref, ButtonProps>(function (props, ref) {
-  const { className, children, onClick } = props;
+  const {
+    className,
+    children,
+    varient = "primary",
+    onClick,
+    ...otherProps
+  } = props;
   return (
     <button
-      className={`btn ${className ? className : ""}`}
+      {...otherProps}
+      className={`btn ${className ? className : ""} btn-${varient}`}
       onClick={onClick}
       ref={ref}
     >
