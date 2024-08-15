@@ -1,3 +1,17 @@
+# [3.14.0](https://github.com/crazysammich/react-components-lib/compare/v3.13.0...v3.14.0) (2024-08-15)
+
+
+### Bug Fixes
+
+* adjust Button styles ([4cf9b95](https://github.com/crazysammich/react-components-lib/commit/4cf9b95e0a6b34dbf75547ac987f4ee28d992e47))
+
+
+### Features
+
+* add Input component ([59871e7](https://github.com/crazysammich/react-components-lib/commit/59871e7537ce86f203658897327f6c6325a14fd9))
+* add Nav component ([4ec2115](https://github.com/crazysammich/react-components-lib/commit/4ec2115a8b1910c517d099ead1d63b00d9efa877))
+* add tab variant to Tabs ([055885d](https://github.com/crazysammich/react-components-lib/commit/055885d27d1207eb4c0ddc32a40308f918e7502d))
+
 # [3.13.0](https://github.com/crazysammich/react-components-lib/compare/v3.12.2...v3.13.0) (2024-07-09)
 
 
