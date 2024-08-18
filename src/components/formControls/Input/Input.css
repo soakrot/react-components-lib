@@ -1,4 +1,19 @@
 .input-container {
+  --rc-input-ff: var(--font-primary);
+  --rc-input-fs: 1rem;
+  --rc-input-clr: hsl(213, 96%, 18%);
+  --rc-input-border-clr: hsl(229, 24%, 87%);
+  /* Invalid properties */
+  --rc-input-invalid-border-clr: hsl(354, 80%, 57%);
+  /* Focus properties */
+  --rc-input-focus-border-clr: hsl(213, 96%, 18%);
+  --rc-input-placeholder-clr: hsl(231, 11%, 63%);
+  --rc-input-invalid-clr: hsl(354, 80%, 57%);
+
+  --rc-label-ff: var(--font-primary);
+  --rc-label-fs: 0.875rem;
+  --rc-label-clr: hsl(213, 96%, 18%);
+
   display: flex;
   max-width: 45%;
   flex-direction: column;
@@ -15,16 +30,6 @@
 */
 
 .rc-input {
-  --rc-input-ff: var(--font-primary);
-  --rc-input-fs: 1rem;
-  --rc-input-clr: hsl(213, 96%, 18%);
-  --rc-input-border-clr: hsl(229, 24%, 87%);
-  /* Invalid properties */
-  --rc-input-invalid-border-clr: hsl(354, 80%, 57%);
-  /* Focus properties */
-  --rc-input-focus-border-clr: hsl(213, 96%, 18%);
-  --rc-input-placeholder-clr: hsl(231, 11%, 63%);
-
   padding: 0.7em;
   border: 1px solid var(--rc-input-border-clr);
   border-radius: 7px;
@@ -34,7 +39,6 @@
   caret-color: hsl(213, 96%, 18%);
 
   & + span {
-    --rc-input-invalid-clr: hsl(354, 80%, 57%);
     position: relative;
   }
 
