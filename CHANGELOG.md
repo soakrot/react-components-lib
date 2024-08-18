@@ -1,3 +1,10 @@
+## [3.14.5](https://github.com/crazysammich/react-components-lib/compare/v3.14.4...v3.14.5) (2024-08-18)
+
+
+### Bug Fixes
+
+* pass className prop to input-container instead of input element ([e2bc6bd](https://github.com/crazysammich/react-components-lib/commit/e2bc6bd105516855e6ba60a3c6528d3dfdfcc26d))
+
 ## [3.14.4](https://github.com/crazysammich/react-components-lib/compare/v3.14.3...v3.14.4) (2024-08-18)
 
 
