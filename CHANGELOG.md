@@ -1,3 +1,10 @@
+## [3.14.4](https://github.com/crazysammich/react-components-lib/compare/v3.14.3...v3.14.4) (2024-08-18)
+
+
+### Bug Fixes
+
+* add css variable for controlling label font,family, size and color ([11cc40d](https://github.com/crazysammich/react-components-lib/commit/11cc40d1778e7367075a61c14c492444d757126d))
+
 ## [3.14.3](https://github.com/crazysammich/react-components-lib/compare/v3.14.2...v3.14.3) (2024-08-18)
 
 
