@@ -5,6 +5,15 @@
   row-gap: 0.4rem;
 }
 
+/* Input custom properites */
+/* 
+ --input-clr
+ --input-border-clr
+ 
+ --input-invalid-[base-property-name]
+ --input-focuse-[border-clr]
+*/
+
 .rc-input {
   --rc-input-clr: var(--input-clr, hsl(213, 96%, 18%));
   --rc-input-border-clr: var(--input-border-clr, hsl(229, 24%, 87%));

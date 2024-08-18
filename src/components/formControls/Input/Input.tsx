@@ -6,9 +6,8 @@ import {
 } from "react";
 import "./Input.css";
 
-interface InputProps extends ComponentPropsWithRef<"input"> {
+export interface InputProps extends ComponentPropsWithRef<"input"> {
   id: string;
-  name: string;
   isValid: boolean;
   className?: string;
   label?: string;
