@@ -15,36 +15,32 @@
 */
 
 .rc-input {
-  --rc-input-ff: var(--input-ff, var(--font-primary));
-  --rc-input-fs: var(--input-fs, 1rem);
-  --rc-input-clr: var(--input-clr, hsl(213, 96%, 18%));
-  --rc-input-border-clr: var(--input-border-clr, hsl(229, 24%, 87%));
+  --rc-input-ff: var(--font-primary);
+  --rc-input-fs: 1rem;
+  --rc-input-clr: hsl(213, 96%, 18%);
+  --rc-input-border-clr: hsl(229, 24%, 87%);
   /* Invalid properties */
-  --rc-input-invalid-border-clr: var(
-    --input-invalid-border-clr,
-    hsl(354, 80%, 57%)
-  );
+  --rc-input-invalid-border-clr: hsl(354, 80%, 57%);
   /* Focus properties */
-  --rc-input-focus-border-clr: var(
-    --input-focus-border-clr,
-    hsl(213, 96%, 18%)
-  );
-  --rc-input-placeholder-clr: var(--input-placeholder-clr, hsl(231, 11%, 63%));
+  --rc-input-focus-border-clr: hsl(213, 96%, 18%);
+  --rc-input-placeholder-clr: hsl(231, 11%, 63%);
 
   padding: 0.7em;
   border: 1px solid var(--rc-input-border-clr);
   border-radius: 7px;
+  font-family: var(--rc-input-ff);
+  font-size: var(--rc-input-fs);
   color: var(--rc-input-clr);
   caret-color: hsl(213, 96%, 18%);
 
   & + span {
-    --rc-input-invalid-clr: var(--input-invalid-clr, hsl(354, 80%, 57%));
+    --rc-input-invalid-clr: hsl(354, 80%, 57%);
     position: relative;
   }
 
   & + span::before {
     position: absolute;
-    top: -60px;
+    top: -70px;
     right: 0;
     content: "This field is required";
     color: var(--rc-input-invalid-clr);
