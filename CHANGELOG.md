@@ -1,3 +1,10 @@
+## [3.14.3](https://github.com/crazysammich/react-components-lib/compare/v3.14.2...v3.14.3) (2024-08-18)
+
+
+### Bug Fixes
+
+* assign css variables in input ([038319b](https://github.com/crazysammich/react-components-lib/commit/038319b22eb39a6def6f7b5719ce2dccd8c1038d))
+
 ## [3.14.2](https://github.com/crazysammich/react-components-lib/compare/v3.14.1...v3.14.2) (2024-08-18)
 
 
