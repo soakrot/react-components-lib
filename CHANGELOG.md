@@ -1,3 +1,10 @@
+## [3.14.1](https://github.com/crazysammich/react-components-lib/compare/v3.14.0...v3.14.1) (2024-08-18)
+
+
+### Bug Fixes
+
+* remove name prop from input type ([5106efc](https://github.com/crazysammich/react-components-lib/commit/5106efc1b0bdc373f43be9bbc0bf3c7aa58dd01a))
+
 # [3.14.0](https://github.com/crazysammich/react-components-lib/compare/v3.13.0...v3.14.0) (2024-08-15)
 
 
