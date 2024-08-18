@@ -74,6 +74,8 @@
   }
 }
 
-.input-container > label {
-  font-size: 0.875rem;
+.rc-input__label {
+  font-family: var(--rc-label-ff);
+  font-size: var(--rc-label-fs);
+  color: var(--rc-label-clr);
 }

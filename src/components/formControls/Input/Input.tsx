@@ -33,7 +33,9 @@ const Input = forwardRef<Ref, InputProps>((props, ref) => {
 
   return (
     <div className={`input-container ${className || ""}`}>
-      <label htmlFor={id}>{label}</label>
+      <label className="rc-input__label" htmlFor={id}>
+        {label}
+      </label>
       <input
         className="rc-input"
         id={id}
