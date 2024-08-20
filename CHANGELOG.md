@@ -1,3 +1,10 @@
+## [3.14.8](https://github.com/crazysammich/react-components-lib/compare/v3.14.7...v3.14.8) (2024-08-20)
+
+
+### Bug Fixes
+
+* border color invalid state css variable not working in Input ([64b3e98](https://github.com/crazysammich/react-components-lib/commit/64b3e985fed2ad3f1a782452925e0cf1c1183b8e))
+
 ## [3.14.7](https://github.com/crazysammich/react-components-lib/compare/v3.14.6...v3.14.7) (2024-08-20)
 
 ## [3.14.6](https://github.com/crazysammich/react-components-lib/compare/v3.14.5...v3.14.6) (2024-08-18)
