@@ -6,8 +6,10 @@
   --rc-input-placeholder-clr: var(--input-placeholder-clr, hsl(231, 11%, 63%));
   /* Invalid properties */
   --rc-input-invalid-clr: var(--input-invalid-clr, hsl(354, 80%, 57%));
-  --rc-input-invalid-border-clr: var(--input-invalid-border-clr)
-    hsl(354, 80%, 57%);
+  --rc-input-invalid-border-clr: var(
+    --input-invalid-border-clr,
+    hsl(354, 80%, 57%)
+  );
   /* Focus properties */
   --rc-input-focus-border-clr: var(
     --input-focus-border-clr,
