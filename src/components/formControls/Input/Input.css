@@ -1,33 +1,28 @@
 .input-container {
-  --rc-input-ff: var(--font-primary);
-  --rc-input-fs: 1rem;
-  --rc-input-clr: hsl(213, 96%, 18%);
-  --rc-input-border-clr: hsl(229, 24%, 87%);
+  --rc-input-ff: var(--input-ff, var(--font-primary));
+  --rc-input-fs: var(--input-fs, 1rem);
+  --rc-input-clr: var(--input-clr, hsl(213, 96%, 18%));
+  --rc-input-border-clr: var(--input-border-clr, hsl(229, 24%, 87%));
+  --rc-input-placeholder-clr: var(--input-placeholder-clr, hsl(231, 11%, 63%));
   /* Invalid properties */
-  --rc-input-invalid-border-clr: hsl(354, 80%, 57%);
+  --rc-input-invalid-clr: var(--input-invalid-clr, hsl(354, 80%, 57%));
+  --rc-input-invalid-border-clr: var(--input-invalid-border-clr)
+    hsl(354, 80%, 57%);
   /* Focus properties */
-  --rc-input-focus-border-clr: hsl(213, 96%, 18%);
-  --rc-input-placeholder-clr: hsl(231, 11%, 63%);
-  --rc-input-invalid-clr: hsl(354, 80%, 57%);
+  --rc-input-focus-border-clr: var(
+    --input-focus-border-clr,
+    hsl(213, 96%, 18%)
+  );
 
-  --rc-label-ff: var(--font-primary);
-  --rc-label-fs: 0.875rem;
-  --rc-label-clr: hsl(213, 96%, 18%);
+  --rc-label-ff: var(--label-ff, var(--font-primary));
+  --rc-label-fs: var(--label-fs, 0.875rem);
+  --rc-label-clr: var(--label-clr, hsl(213, 96%, 18%));
 
   display: flex;
   max-width: 45%;
   flex-direction: column;
   row-gap: 0.4rem;
 }
-
-/* Input custom properites */
-/* 
- --input-clr
- --input-border-clr
- 
- --input-invalid-[base-property-name]
- --input-focuse-[border-clr]
-*/
 
 .rc-input {
   padding: 0.7em;
