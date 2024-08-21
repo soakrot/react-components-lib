@@ -1,9 +1,14 @@
-import { AriaAttributes, forwardRef, SyntheticEvent, useState } from "react";
+import {
+  ComponentPropsWithRef,
+  forwardRef,
+  SyntheticEvent,
+  useState,
+} from "react";
 import classes from "./Image.module.css";
 
 export type ImgDimensions = { width: number; height: number };
 
-interface ImageProps extends AriaAttributes {
+interface ImageProps extends ComponentPropsWithRef<"img"> {
   alt: string;
   className?: string;
   src: string;
