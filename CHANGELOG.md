@@ -1,3 +1,11 @@
+## [3.14.10](https://github.com/crazysammich/react-components-lib/compare/v3.14.9...v3.14.10) (2024-08-26)
+
+
+### Bug Fixes
+
+* add the ability to pass multiple labels to Input ([8c1f951](https://github.com/crazysammich/react-components-lib/commit/8c1f951e23f66ab5c78df9968299283a018f3ac1))
+* input isValid is not declared in stories ([66205ef](https://github.com/crazysammich/react-components-lib/commit/66205efec48f7b80788137e7989247ec52441163))
+
 ## [3.14.9](https://github.com/crazysammich/react-components-lib/compare/v3.14.8...v3.14.9) (2024-08-21)
 
 ## [3.14.8](https://github.com/crazysammich/react-components-lib/compare/v3.14.7...v3.14.8) (2024-08-20)
