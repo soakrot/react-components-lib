@@ -11,8 +11,15 @@ const meta: Meta<typeof Input> = {
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-function withState<T>(Component: ComponentType<T>) {
-  return (props: T) => {
+// This tells Typescript that the wrapped component is getting its
+// expected props
+type WithValidationProps = {
+  isValid: boolean;
+};
+function withValidation<T extends WithValidationProps>(
+  WrappedComponent: ComponentType<T>
+) {
+  return (props: Omit<T, keyof WithValidationProps>) => {
     const { value, hasError, handleChangeInput, handleBlurInput } =
       useInput(validateInput);
 
@@ -21,11 +28,10 @@ function withState<T>(Component: ComponentType<T>) {
     }
 
     return (
-      <Component
-        {...props}
+      <WrappedComponent
+        {...(props as T)}
         value={value}
         isValid={hasError}
-        required={hasError}
         onChange={handleChangeInput}
         onBlur={handleBlurInput}
       />
@@ -33,12 +39,12 @@ function withState<T>(Component: ComponentType<T>) {
   };
 }
 
-const InputWithState = withState(Input);
+const InputWithValidation = withValidation(Input);
 const Default: Story = {
   render() {
     return (
       <form onSubmit={(e) => e.preventDefault()}>
-        <InputWithState
+        <InputWithValidation
           id="name-input"
           name="name-input"
           labels="Name"
@@ -58,7 +64,7 @@ const WithMultipleLabels: Story = {
   render() {
     return (
       <form onSubmit={(e) => e.preventDefault()}>
-        <InputWithState
+        <InputWithValidation
           id="name-input"
           name="name-input"
           labels={[
