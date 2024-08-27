@@ -1,4 +1,4 @@
-.input-container {
+.rc-input-container {
   --rc-input-ff: var(--input-ff, var(--font-primary));
   --rc-input-fs: var(--input-fs, 1rem);
   --rc-input-clr: var(--input-clr, hsl(213, 96%, 18%));
@@ -19,6 +19,7 @@
   --rc-label-ff: var(--label-ff, var(--font-primary));
   --rc-label-fs: var(--label-fs, 0.875rem);
   --rc-label-clr: var(--label-clr, hsl(213, 96%, 18%));
+  position: relative;
 
   display: flex;
   max-width: 45%;
@@ -35,28 +36,13 @@
   color: var(--rc-input-clr);
   caret-color: hsl(213, 96%, 18%);
 
-  & + span {
-    position: relative;
-  }
-
-  & + span::before {
-    position: absolute;
-    top: -70px;
-    right: 0;
-    content: "This field is required";
-    color: var(--rc-input-invalid-clr);
-    font-size: 0.8rem;
-    opacity: 0;
-    transition: opacity 150ms ease-out;
-  }
-
   &:invalid,
   &[aria-invalid="true"] {
     border-color: var(--rc-input-invalid-border-clr);
   }
 
-  &:invalid + span::before,
-  &[aria-invalid="true"] + span::before {
+  &:invalid + .rc-input__error,
+  &[aria-invalid="true"] + .rc-input__error {
     opacity: 1;
   }
 
@@ -75,4 +61,13 @@
   font-family: var(--rc-label-ff);
   font-size: var(--rc-label-fs);
   color: var(--rc-label-clr);
+}
+
+.rc-input__error {
+  position: absolute;
+  right: 0;
+  color: var(--rc-input-invalid-clr);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
 }

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Input>;
 // This tells Typescript that the wrapped component is getting its
 // expected props
 type WithValidationProps = {
-  isValid: boolean;
+  error?: boolean;
 };
 function withValidation<T extends WithValidationProps>(
   WrappedComponent: ComponentType<T>
@@ -31,7 +31,7 @@ function withValidation<T extends WithValidationProps>(
       <WrappedComponent
         {...(props as T)}
         value={value}
-        isValid={hasError}
+        error={hasError}
         onChange={handleChangeInput}
         onBlur={handleBlurInput}
       />
@@ -47,7 +47,7 @@ const Default: Story = {
         <InputWithValidation
           id="name-input"
           name="name-input"
-          labels="Name"
+          label="Name"
           placeholder="e.g. Omar"
           pattern="[A-Za-z\s]+"
           minLength={3}
@@ -67,10 +67,11 @@ const WithMultipleLabels: Story = {
         <InputWithValidation
           id="name-input"
           name="name-input"
-          labels={[
-            { text: "Name", position: "before" },
-            { text: "Required", position: "after" },
-          ]}
+          label={
+            <>
+              Name <span>Required</span>
+            </>
+          }
           placeholder="e.g. Omar"
           pattern="[A-Za-z\s]+"
           minLength={3}
