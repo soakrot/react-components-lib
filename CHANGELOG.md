@@ -1,3 +1,10 @@
+# [3.15.0](https://github.com/crazysammich/react-components-lib/compare/v3.14.10...v3.15.0) (2024-08-28)
+
+
+### Features
+
+* add Switch component ([3e92900](https://github.com/crazysammich/react-components-lib/commit/3e92900635c4fab9b69bec777b150492156d9e38))
+
 ## [3.14.10](https://github.com/crazysammich/react-components-lib/compare/v3.14.9...v3.14.10) (2024-08-26)
 
 
