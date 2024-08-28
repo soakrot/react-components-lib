@@ -36,7 +36,11 @@ const Input = forwardRef<Ref, InputProps>((props, ref) => {
 
   return (
     <div className={`rc-input-container ${className || ""}`}>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && (
+        <label className="rc-input__label" htmlFor={id}>
+          {label}
+        </label>
+      )}
       <input
         className="rc-input"
         id={id}
