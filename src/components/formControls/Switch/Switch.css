@@ -1,6 +1,19 @@
 .rc-switch {
   --rc-switch-bg-clr: var(--switch-bg-clr, hsl(213, 96%, 18%));
   --rc-thumb-clr: var(--thumb-clr, white);
+  --rc-switch-w: var(--switch-w, 45px);
+  --rc-switch-h: var(--switch-h, 25px);
+  --rc-thumb-scale: var(--thumb-scale, 0.6);
+  --rc-thumb-r: calc(var(--rc-switch-h) * var(--rc-thumb-scale));
+  --rc-thumb-offset: calc(
+    var(--rc-switch-h) - var(--rc-thumb-r) - calc(var(--rc-switch-h) * 0.2)
+  );
+  --rc-thumb-y: var(--thumb-y, var(--rc-thumb-offset));
+  --rc-thumb-x1: var(--thumb-x1, 5px);
+  --rc-thumb-x2: var(
+    --thumb-x2,
+    calc((var(--rc-switch-w) - var(--rc-thumb-r)) - var(--rc-thumb-x1))
+  );
   position: relative;
 
   input {
@@ -14,8 +27,8 @@
   .switch-bg {
     position: relative;
     display: inline-block;
-    width: 45px;
-    height: 25px;
+    width: var(--rc-switch-w);
+    height: var(--rc-switch-h);
     border-radius: 15px;
     vertical-align: middle;
     background-color: var(--rc-switch-bg-clr);
@@ -24,16 +37,17 @@
   .switch-thumb {
     cursor: pointer;
     position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 15px;
-    height: 15px;
+    top: var(--rc-thumb-y);
+    left: var(--thumb-x1, 5px);
+    width: var(--rc-thumb-r);
+    height: var(--rc-thumb-r);
     border-radius: 50%;
     background-color: var(--rc-thumb-clr);
-    transition: 150ms ease-out;
+    transition: left 150ms ease-out;
   }
 
   input:checked + .switch-thumb {
-    transform: translateX(20px);
+    left: var(--rc-thumb-x2);
+    /* transform: translateX(20px); */
   }
 }
