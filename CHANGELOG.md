@@ -1,3 +1,15 @@
+# [3.16.0](https://github.com/crazysammich/react-components-lib/compare/v3.15.0...v3.16.0) (2024-08-28)
+
+
+### Bug Fixes
+
+* Input label's styles not applying ([a2f0ea7](https://github.com/crazysammich/react-components-lib/commit/a2f0ea727d9163ff5c6f1188a8356378a4a4e70a))
+
+
+### Features
+
+* add new ProductGallery component ([d915d0c](https://github.com/crazysammich/react-components-lib/commit/d915d0c307850966eb48ec95d3b288b7ae69d158))
+
 # [3.15.0](https://github.com/crazysammich/react-components-lib/compare/v3.14.10...v3.15.0) (2024-08-28)
 
 
