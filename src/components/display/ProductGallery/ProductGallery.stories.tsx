@@ -10,6 +10,7 @@ import imgThumbnail3 from "/assets/product-images/image-product-3-thumbnail.jpg"
 const meta: Meta<typeof ProductGallery> = {
   title: "display/Product Gallery",
   component: ProductGallery,
+  tags: ["autodocs"],
 };
 
 type Story = StoryObj<typeof ProductGallery>;

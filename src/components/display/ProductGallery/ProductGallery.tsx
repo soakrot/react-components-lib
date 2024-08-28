@@ -32,7 +32,7 @@ function ProductGallery(props: ProductGalleryProps) {
     e.preventDefault();
     if (!heroImgRef.current || !zoomPreviewRef.current) return;
     let x, y;
-    // max zoom level - 100 * (zoom - 1 | zoom - 1 === 0 ? 1)
+    // max zoom level - 100 * (zoom - 1 | zoom - 1 === 0 ? 1)a
     const zoomLvl = 400 - 100 * (zoom - 1 || 1);
     // Gets pointer's position
     const pos = getCursorPosition(e);
