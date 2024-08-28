@@ -1,0 +1,39 @@
+.rc-switch {
+  --rc-switch-bg-clr: var(--switch-bg-clr, hsl(213, 96%, 18%));
+  --rc-thumb-clr: var(--thumb-clr, white);
+  position: relative;
+
+  input {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .switch-bg {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+    border-radius: 15px;
+    vertical-align: middle;
+    background-color: var(--rc-switch-bg-clr);
+  }
+
+  .switch-thumb {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--rc-thumb-clr);
+    transition: 150ms ease-out;
+  }
+
+  input:checked + .switch-thumb {
+    transform: translateX(20px);
+  }
+}
