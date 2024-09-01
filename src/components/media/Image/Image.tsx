@@ -25,7 +25,7 @@ const Image = forwardRef<Ref, ImageProps>((props, ref) => {
     src,
     className,
     loading = "lazy",
-    role = "none",
+    role = "img",
     width,
     height,
     onLoad,
