@@ -1,3 +1,10 @@
+## [3.16.2](https://github.com/crazysammich/react-components-lib/compare/v3.16.1...v3.16.2) (2024-09-01)
+
+
+### Bug Fixes
+
+* Image's role prop default value is invalid ([c58634f](https://github.com/crazysammich/react-components-lib/commit/c58634f18abc276a4b4fa73d1da09b7544408a1e))
+
 ## [3.16.1](https://github.com/crazysammich/react-components-lib/compare/v3.16.0...v3.16.1) (2024-08-28)
 
 # [3.16.0](https://github.com/crazysammich/react-components-lib/compare/v3.15.0...v3.16.0) (2024-08-28)
