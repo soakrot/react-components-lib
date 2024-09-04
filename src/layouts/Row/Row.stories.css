@@ -1,0 +1,12 @@
+.default-story .col {
+  color: white;
+  padding: 1rem;
+  border: 1px solid violet;
+  background-color: purple;
+}
+
+.default-story .row {
+  color: white;
+  padding: 1rem;
+  background-color: rosybrown;
+}

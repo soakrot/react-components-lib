@@ -1,0 +1,48 @@
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
+  --cs-max-w-sm: var(--max-w-sm, 568px);
+  --cs-max-w-md: var(--max-w-md, 740px);
+  --cs-max-w-lg: var(--max-w-lg, 1100px);
+  --cs-max-w-xl: var(--max-w-xl, 1280px);
+  --cs-gutter-x: var(--gutter-x, 1rem);
+
+  padding-inline: var(--cs-gutter-x);
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 37.5em) {
+  .container,
+  .container-sm {
+    max-width: var(--cs-max-w-sm);
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .container,
+  .container-sm,
+  .container-md {
+    max-width: var(--cs-max-w-md);
+  }
+}
+
+@media screen and (min-width: 75em) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg {
+    max-width: var(--cs-max-w-lg);
+  }
+}
+
+@media screen and (min-width: 90em) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl {
+    max-width: var(--cs-max-w-xl);
+  }
+}

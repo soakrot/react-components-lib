@@ -31,6 +31,10 @@ export default defineConfig({
         find: "@hooks",
         replacement: fileURLToPath(new URL("./src/hooks", import.meta.url)),
       },
+      {
+        find: "@layouts",
+        replacement: fileURLToPath(new URL("./src/layouts", import.meta.url)),
+      },
     ],
   },
   build: {
