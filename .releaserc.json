@@ -9,7 +9,8 @@
           { "type": "docs", "scope": "README", "release": "patch" },
           { "type": "refactor", "release": "patch" },
           { "type": "pref", "release": "patch" },
-          { "type": "fix", "release": "patch" }
+          { "type": "fix", "release": "patch" },
+          { "type": "build", "release": "patch" }
         ],
         "parserOpts": {
           "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
