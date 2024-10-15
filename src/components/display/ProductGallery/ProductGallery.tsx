@@ -1,4 +1,10 @@
-import { MouseEvent, MouseEventHandler, useRef, useState } from "react";
+import {
+  MouseEvent,
+  MouseEventHandler,
+  RefObject,
+  useRef,
+  useState,
+} from "react";
 import "./ProductGallery.css";
 import { Image } from "../../media";
 
@@ -19,7 +25,6 @@ function ProductGallery(props: ProductGalleryProps) {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [isZoomed, setIsZoom] = useState(false);
   const productGalleryRef = useRef<HTMLDivElement>(null);
-  const heroImgContainerRef = useRef<HTMLDivElement>(null);
   const heroImgRef = useRef<HTMLImageElement>(null);
   const zoomPreviewRef = useRef<HTMLDivElement>(null);
 
@@ -30,60 +35,8 @@ function ProductGallery(props: ProductGalleryProps) {
 
   function handleOnMouseMove(e: MouseEvent<HTMLImageElement>) {
     e.preventDefault();
-    if (!heroImgRef.current || !zoomPreviewRef.current) return;
-    let x, y;
-    // max zoom level - 100 * (zoom - 1 | zoom - 1 === 0 ? 1)a
-    const zoomLvl = 400 - 100 * (zoom - 1 || 1);
-    // Gets pointer's position
-    const pos = getCursorPosition(e);
-    const img = heroImgRef.current;
-    // lens size
-    const lensOffset = { width: zoomLvl, height: zoomLvl };
-    // Lens position
-    x = pos.x - lensOffset.width / 2;
-    y = pos.y - lensOffset.height / 2;
-    // Calculate the ratio between zoom preview and the lens
-    const cx = zoomPreviewRef.current?.offsetWidth / lensOffset.width;
-    const cy = zoomPreviewRef.current?.offsetHeight / lensOffset.height;
-    // Prevent the lens from being positioned outside the image
-    if (x > img.width - lensOffset.width) {
-      x = img.width - lensOffset.width;
-    }
-    if (x < 0) {
-      x = 0;
-    }
-    if (y > img.height - lensOffset.height) {
-      y = img.height - lensOffset.height;
-    }
-    if (y < 0) {
-      y = 0;
-    }
-    zoomPreviewRef.current?.style.setProperty(
-      "background-image",
-      `url('${img.src}')`
-    );
-    zoomPreviewRef.current.style.setProperty(
-      "background-size",
-      `${img.width * cx}px ${img.height * cy}px`
-    );
-    zoomPreviewRef.current?.style.setProperty(
-      "background-position",
-      `-${x * cx}px -${y * cy}px`
-    );
-  }
-
-  function getCursorPosition(e: MouseEvent) {
-    if (!heroImgContainerRef.current) return { x: 0, y: 0 };
-    let y = 0,
-      x = 0;
-    x = e.pageX - heroImgContainerRef.current?.getBoundingClientRect().left;
-    y = e.pageY - heroImgContainerRef.current?.getBoundingClientRect().top;
-    x = x - window.scrollX;
-    y = y - window.scrollY;
-    return {
-      y,
-      x,
-    };
+    const cursorPos = getCursorPosition(e, heroImgRef);
+    moveLens(heroImgRef, zoomPreviewRef, zoom, cursorPos);
   }
 
   return (
@@ -96,7 +49,6 @@ function ProductGallery(props: ProductGalleryProps) {
       )}
       <div
         className="product-gallery__hero"
-        ref={heroImgContainerRef}
         onMouseMove={handleOnMouseMove}
         onMouseOver={() => setIsZoom(true)}
         onMouseLeave={() => setIsZoom(false)}
@@ -122,4 +74,86 @@ function ProductGallery(props: ProductGalleryProps) {
   );
 }
 
+function moveLens(
+  img: RefObject<HTMLImageElement>,
+  previewRef: RefObject<HTMLDivElement | HTMLElement>,
+  zoom: number,
+  cursorPos: { x: number; y: number }
+) {
+  const heroImg = img.current;
+  if (!heroImg) return;
+  const zoomLvl = 400 - 100 * (zoom - 1 || 1);
+  const lensOffset = {
+    cx: 0,
+    cy: 0,
+    width: zoomLvl,
+    height: zoomLvl,
+  };
+  lensOffset.cx = cursorPos.x - lensOffset.width / 2;
+  lensOffset.cy = cursorPos.y - lensOffset.height / 2;
+
+  const lensDeltaX = heroImg.width - lensOffset.width;
+  const lensDeltaY = heroImg.height - lensOffset.height;
+
+  const isLensTopEdgeOutboundImg = lensOffset.cy < 0;
+  const isLensBottomEdgeOutboundImg = lensOffset.cy > lensDeltaY;
+  const isLensLeftEdgeOutboundImg = lensOffset.cx < 0;
+  const isLensRightEdgeOutboundImg = lensOffset.cx > lensDeltaX;
+
+  if (isLensRightEdgeOutboundImg) {
+    lensOffset.cx = lensDeltaX;
+  }
+  if (isLensLeftEdgeOutboundImg) {
+    lensOffset.cx = 0;
+  }
+  if (isLensBottomEdgeOutboundImg) {
+    lensOffset.cy = lensDeltaY;
+  }
+  if (isLensTopEdgeOutboundImg) {
+    lensOffset.cy = 0;
+  }
+  movePreviewImg(heroImg, previewRef, lensOffset);
+}
+
+function movePreviewImg(
+  img: HTMLImageElement,
+  previewRef: RefObject<HTMLDivElement | HTMLElement>,
+  lensOffset: { cx: number; cy: number; width: number; height: number }
+) {
+  const zoomPreview = previewRef.current;
+  if (!zoomPreview) return;
+  const lensToPreviewRatioX = zoomPreview?.offsetWidth / lensOffset.width;
+  const lensToPreviewRatioY = zoomPreview?.offsetHeight / lensOffset.height;
+  const previewImg = img;
+  const previewImgWidth = previewImg.width * lensToPreviewRatioX;
+  const previewImgHeight = previewImg.height * lensToPreviewRatioY;
+  const previewImgPosX = -1 * (lensOffset.cx * lensToPreviewRatioX);
+  const previewImgPosY = -1 * (lensOffset.cy * lensToPreviewRatioY);
+
+  const zoomPreviewStyles = {
+    "background-image": `url('${previewImg.src}')`,
+    "background-size": `${previewImgWidth}px ${previewImgHeight}px`,
+    "background-position": `${previewImgPosX}px ${previewImgPosY}px`,
+    top: `${window.scrollY + 20}px`,
+  };
+
+  for (const [prop, val] of Object.entries(zoomPreviewStyles)) {
+    zoomPreview.style.setProperty(prop, val);
+  }
+}
+
+function getCursorPosition(e: MouseEvent, img: RefObject<HTMLImageElement>) {
+  const heroImg = img.current;
+  if (!heroImg) return { x: 0, y: 0 };
+  let y = 0,
+    x = 0;
+  x = e.pageX - heroImg?.getBoundingClientRect().left;
+  y = e.pageY - heroImg?.getBoundingClientRect().top;
+  x = x - window.scrollX;
+  y = y - window.scrollY;
+  return {
+    y,
+    x,
+  };
+}
 export default ProductGallery;

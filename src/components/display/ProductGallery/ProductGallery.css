@@ -28,7 +28,9 @@
 
 .product-gallery__zoom {
   position: absolute;
-  top: 10%;
+  pointer-events: none;
+  z-index: 1;
+  top: 0;
   right: 0;
   border: 1px solid black;
   width: 500px;
