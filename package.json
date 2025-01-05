@@ -3,6 +3,12 @@
   "version": "3.17.3",
   "description": "Simple React components library",
   "main": "dist/main.js",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "default": "./dist/main.js"
+    }
+  },
   "types": "dist/main.d.ts",
   "type": "module",
   "scripts": {
