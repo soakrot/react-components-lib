@@ -1,3 +1,10 @@
+## [3.17.3](https://github.com/intellectualen/react-components-lib/compare/v3.17.2...v3.17.3) (2025-01-05)
+
+
+### Bug Fixes
+
+* remove trailing comma ([776c7f6](https://github.com/intellectualen/react-components-lib/commit/776c7f6c4e8d97f475d2076cc18602f0c154e2a9))
+
 ## [3.17.2](https://github.com/crazysammich/react-components-lib/compare/v3.17.1...v3.17.2) (2024-10-15)
 
 ## [3.17.1](https://github.com/crazysammich/react-components-lib/compare/v3.17.0...v3.17.1) (2024-09-09)
