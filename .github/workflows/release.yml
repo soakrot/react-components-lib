@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: "20"
           registry-url: "https://npm.pkg.github.com"
-          scope: "@crazysammich"
+          scope: "@intellectualen"
       - name: Install dependencies
         run: npm install
       - name: Build package
