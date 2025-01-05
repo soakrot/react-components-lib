@@ -1,3 +1,5 @@
+## [3.17.5](https://github.com/intellectualen/react-components-lib/compare/v3.17.4...v3.17.5) (2025-01-05)
+
 ## [3.17.4](https://github.com/intellectualen/react-components-lib/compare/v3.17.3...v3.17.4) (2025-01-05)
 
 ## [3.17.3](https://github.com/intellectualen/react-components-lib/compare/v3.17.2...v3.17.3) (2025-01-05)
