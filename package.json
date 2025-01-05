@@ -1,6 +1,6 @@
 {
   "name": "@intellectualen/react-components-lib",
-  "version": "3.17.3",
+  "version": "3.17.4",
   "description": "Simple React components library",
   "main": "dist/main.js",
   "exports": {
