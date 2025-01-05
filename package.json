@@ -22,11 +22,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "dist/main.js"
-    }
-  },
   "sideEffects": [
     "**/*.css"
   ],
