@@ -1,6 +1,6 @@
 {
   "name": "@soakrot/react-components-lib",
-  "version": "3.17.5",
+  "version": "3.17.6",
   "description": "Simple React components library",
   "type": "module",
   "main": "dist/main.js",
