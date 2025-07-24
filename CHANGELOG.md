@@ -1,3 +1,10 @@
+## [3.17.7](https://github.com/soakrot/react-components-lib/compare/v3.17.6...v3.17.7) (2025-07-24)
+
+
+### Bug Fixes
+
+* remove old url references to intellectualen ([d2e1e21](https://github.com/soakrot/react-components-lib/commit/d2e1e2197d49f3939f788a24c3bdfe99bbd32989))
+
 ## [3.17.6](https://github.com/intellectualen/react-components-lib/compare/v3.17.5...v3.17.6) (2025-07-24)
 
 ## [3.17.5](https://github.com/intellectualen/react-components-lib/compare/v3.17.4...v3.17.5) (2025-01-05)
